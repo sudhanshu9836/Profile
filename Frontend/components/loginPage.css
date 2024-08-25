@@ -1,0 +1,81 @@
+@import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
+
+
+
+.main-box{
+    display: flex;
+    justify-content: center;
+    margin-top: 4%;
+}
+.right{
+    width: 40%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    border: 2px solid lightgrey;
+    border-left: none;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+.r2{
+    height: 40%;
+    width: 60%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    margin-top: -7%;
+}
+label{
+    opacity: 0.7;
+}
+.field{
+    display: flex;
+    flex-direction: column;
+}
+
+input{
+    height: 2em;
+    margin-top: 1em;
+    border-radius: 5px;
+    padding: 10px;
+}
+
+.r3, .r1{
+    width: 60%;
+}
+
+.r3 button{
+    cursor: pointer;
+    width: 100%;
+    height: 3em;
+    border-radius: 10px;
+    color: white;
+    background-color: #824ef5;
+    margin-bottom: 10px;
+}
+.r3 button:hover{
+    background-color: lightgray;
+    color: black;
+}
+.r3{
+    margin-top: -5%;
+}
+.r1 h2{
+    font-family: "Libre Baskerville", serif;
+    font-weight: 700;
+}
+.r1 p{
+    font-family: "Open Sans", sans-serif;
+    line-height: 1.5em;
+    word-spacing: 0.1em;
+    opacity: 0.9;
+}
+
+.r3 p{
+    color: gray;
+}
+.r3 a{
+    color: blue;
+}
