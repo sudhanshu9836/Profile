@@ -1,12 +1,27 @@
+* {
+    background-image: url('https://i.pinimg.com/564x/7d/e1/4f/7de14f52151241903d8894bbbfef9d4d.jpg');
+    background-size: cover; 
+    background-repeat: no-repeat;
+    background-position: center; 
+    overflow: hidden;
+}
+.details, .details-left, .details-right, .fields, label, input, textarea, button, h2,.field,select {
+    background-image: none; 
+}
+
 .details{
     display: flex;
     justify-content: space-around;
+    background-image: url("https://i.pinimg.com/564x/7d/e1/4f/7de14f52151241903d8894bbbfef9d4d.jpg");
+    background-repeat: none;
+    background-position: center;
 }
 
 .details-left{
     display: flex;
     flex-direction: column;
     justify-content: space-around;
+    margin-left: 10vmax;
 }
 label{
     opacity: 0.7;
@@ -19,7 +34,7 @@ label{
 
 h2{
     text-align: center;
-    margin: 30px 0px;
+    margin: 25px 0px;
 }
 
 
@@ -49,4 +64,26 @@ textarea{
     margin-top: 1em;
     border-radius: 5px;
     padding: 10px;
+}
+
+#photo-upload{
+    height: 10vmax;
+    width: 10vmax;
+    border-radius: 50%;
+}
+#img-field{
+    flex-direction: row;
+    margin-bottom: 5vmax;
+}
+
+button{
+    padding: 1vmax;
+    background-color: rgb(5, 92, 5);
+    color: white;
+    cursor: pointer;
+    border-radius: 7px;
+    margin: 2vmax 7vmax;
+}
+button:hover{
+    box-shadow: 2px 2px 5px rgb(20, 212, 20);
 }

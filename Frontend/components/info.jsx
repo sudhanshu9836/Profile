@@ -49,8 +49,9 @@ function Info() {
         </div>
       </div>
       <div className="details-right">
-      <div class="fields">
-            <label for="profile-picture">Profile Picture:</label>
+      <div class="fields" id='img-field'>
+        <img src="https://i.pinimg.com/564x/d2/98/4e/d2984ec4b65a8568eab3dc2b640fc58e.jpg" alt="img" id='photo-upload'/>
+            {/* <label for="profile-picture">Profile Picture:</label> */}
             <input type="file" id="profile-picture" name="profile-picture" accept="image/*" required/>
         </div>
 
