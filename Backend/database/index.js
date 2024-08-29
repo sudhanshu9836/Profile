@@ -3,7 +3,7 @@ import { DB_Name } from "../constants.js";
 
 async function connectDB(){
     try {
-        await mongoose.connect(`mongodb+srv://sudhanshutiwari9836:omjitiwari@clusterprofiler.ijxkd.mongodb.net/${DB_Name}`);
+        await mongoose.connect(`${process.env.MONGODB_URI}/${DB_Name}`);
         console.log("MongoDB connected");
     } catch (error) {
         console.log("Error : ", error);
