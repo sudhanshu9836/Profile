@@ -61,7 +61,7 @@ function Info() {
         </div>
 
         <div class="fields">
-            <label for="twitter">Twitter Handle:</label>
+            <label for="twitter">Instagram Handle:</label>
             <input type="url" id="twitter" name="twitter"/>
         </div>
 
