@@ -1,8 +1,9 @@
-*{
+html,body{
+    height: 100%;
+    width: 100%;
     margin: 0;
     padding: 0;
 }
-
 #avatar{
     height: 15vmax;
     width: 15vmax;
@@ -60,4 +61,48 @@
     background-color: #119df5;
     color: white;
     cursor: pointer;
+}
+
+
+/* 3rd section */
+
+.i3{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    border-top: 2px solid lightgray;
+    padding: 20px 0px;
+    margin-top: 20px;
+    background-color: #e2ecf0;
+}
+.s1 p{
+    margin: 15px 0px;
+    max-width: 380px;
+}
+.s1 span{
+    font-weight: 600;
+    margin-right: 5px;
+}
+.s2{
+    display: flex;
+    flex-direction: column;
+}
+.s2 a{
+    text-decoration: none;
+    margin: 10px 0px;
+    color: black;
+}
+.s2 i{
+    margin-right: 10px;
+}
+#lgt{
+    padding: 10px 30px;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: rgba(0,0,0,0.6);
+    color: white;
+}
+#lgt:hover{
+        background-color: white;
+        color: black;
 }

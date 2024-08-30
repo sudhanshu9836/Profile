@@ -24,6 +24,52 @@ function Profile() {
             <button id='flw-bt'>+ Follow</button>
           </div>
         </div>
+        <div className="i2">
+          <div className="share">
+          <h2>Share your thoughts :</h2>
+          <input type="text" id='share-input' />
+          <input type="file"  id='share-media'/>
+          <button id='shr'>Share</button>
+          </div>
+          <h2>Your posts</h2>
+          <div className="posts">
+          <div class="post">
+              <p>This is a random tweet about coding!</p>
+          </div>
+
+          <div class="post">
+              <p>Just finished a 10k run, feeling great! #fitness</p>
+          </div>
+
+          <div class="post">
+              <p>Exploring new cafes in town. Coffee is life! ☕</p>
+          </div>
+
+          <div class="post">
+              <p>Excited for the weekend! Plans? #TGIF</p>
+          </div>
+
+          <div class="post">
+              <p>Learning CSS can be fun and frustrating at the same time.</p>
+          </div>
+
+          </div>
+        </div>
+        <div className="i3">
+          <div className="s1">
+            <p><span>Phone no :</span> 9492819289</p>
+            <p><span>Email : </span>sudhanshutiwaro9836@gmail.com</p>
+            <p><span>Address :</span> Gate 1 , Minal Mall , Minal Residency, Bhopal</p>
+          </div>
+          <div className="s2">
+          <a href=""><i class="fa-brands fa-facebook"></i>Facebook</a>
+          <a href=""><i class="fa-brands fa-instagram"></i>Instagram</a>
+          <a href=""><i class="fa-brands fa-linkedin"></i>Linkedin</a>
+          </div>
+          <div className="s3">
+          <button id='lgt'>Logout</button>
+          </div>
+        </div>
       </div>
 
     </div>
