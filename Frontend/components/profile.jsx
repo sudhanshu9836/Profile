@@ -25,13 +25,13 @@ function Profile() {
           </div>
         </div>
         <div className="i2">
+          <div className="left">
           <div className="share">
-          <h2>Share your thoughts :</h2>
-          <input type="text" id='share-input' />
+          <textarea id='share-input' placeholder='Share your thoughts'/>
           <input type="file"  id='share-media'/>
           <button id='shr'>Share</button>
           </div>
-          <h2>Your posts</h2>
+          <h2 id='post-head'>Your posts</h2>
           <div className="posts">
           <div class="post">
               <p>This is a random tweet about coding!</p>
@@ -53,6 +53,10 @@ function Profile() {
               <p>Learning CSS can be fun and frustrating at the same time.</p>
           </div>
 
+          </div>
+          </div>
+          <div className="right">
+            <h2>Suggestions</h2>
           </div>
         </div>
         <div className="i3">
