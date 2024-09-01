@@ -57,6 +57,22 @@ function Profile() {
           </div>
           <div className="right">
             <h2>Suggestions</h2>
+            <div className="suggestions">
+              <div className="suggest">
+                <img src="https://media.licdn.com/dms/image/v2/D4D03AQFc8Wqa_Y58iQ/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1721372147897?e=1730332800&v=beta&t=SQmDQBfPoP7TkGOV_DB46Qc7d3CVrrOx3zpyAP-t3hQ" alt="" id='suggest-img' />
+                <h3>sudhanshu__tiwari_</h3>
+              </div>
+              <div className="suggest">
+                <img src="https://media.licdn.com/dms/image/v2/D4D03AQFc8Wqa_Y58iQ/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1721372147897?e=1730332800&v=beta&t=SQmDQBfPoP7TkGOV_DB46Qc7d3CVrrOx3zpyAP-t3hQ" alt="" id='suggest-img' />
+                <h3>sudhanshu__tiwari_</h3>
+              </div> <div className="suggest">
+                <img src="https://media.licdn.com/dms/image/v2/D4D03AQFc8Wqa_Y58iQ/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1721372147897?e=1730332800&v=beta&t=SQmDQBfPoP7TkGOV_DB46Qc7d3CVrrOx3zpyAP-t3hQ" alt="" id='suggest-img' />
+                <h3>sudhanshu__tiwari_</h3>
+              </div> <div className="suggest">
+                <img src="https://media.licdn.com/dms/image/v2/D4D03AQFc8Wqa_Y58iQ/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1721372147897?e=1730332800&v=beta&t=SQmDQBfPoP7TkGOV_DB46Qc7d3CVrrOx3zpyAP-t3hQ" alt="" id='suggest-img' />
+                <h3>sudhanshu__tiwari_</h3>
+              </div>
+            </div>
           </div>
         </div>
         <div className="i3">
