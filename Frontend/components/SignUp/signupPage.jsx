@@ -30,7 +30,7 @@ function SignupPage() {
             </div>  
         </div>
         <div className="r3">
-        <button>Sign Up</button>
+        <button id='sup-btn'>Sign Up</button>
         <p>Have an acoount ? <a href="">Sign in</a></p>
         </div>
     </div>

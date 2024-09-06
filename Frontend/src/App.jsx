@@ -1,14 +1,34 @@
-import LoginPage from "../components/loginPage"
-// import Info from "../components/info"
-// import SignupPage from "../components/signupPage"
+import {RouterProvider, createBrowserRouter} from 'react-router-dom'
 
-import Profile from "../components/profile"
 
+import LoginPage from "../components/Login/loginPage"
+import Info from "../components/Info/info"
+import SignupPage from "../components/SignUp/signupPage"
+import Profile from "../components/Profile/profile"
+
+const router = createBrowserRouter([
+  {
+    path: "/login",
+    element: <LoginPage/>
+  },
+  {
+    path: "/register",
+    element: <SignupPage/>
+  },
+  {
+    path: "/info",
+    element: <Info/>
+  },
+  {
+    path: "/profile",
+    element: <Profile/>
+  }
+]);
 
 function App() {
   return (
     <>
-     <LoginPage/>
+      <RouterProvider router={router}/>
     </>
   )
 }

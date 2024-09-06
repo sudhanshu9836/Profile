@@ -1,10 +1,11 @@
-html,body{
+html, body {
     height: 100%;
     width: 100%;
     margin: 0;
     padding: 0;
 }
-#avatar{
+
+#profile-avatar {
     height: 15vmax;
     width: 15vmax;
     border-radius: 50%;
@@ -12,15 +13,15 @@ html,body{
     left: 13vmax;
 }
 
-
-.i1{
+.profile-i1 {
     padding-top: 40px;
     border-bottom: 2px solid lightgray;
     padding-bottom: 20px;
     background-color: #e2ecf0;
     position: relative;
 }
-.i1B{
+
+.profile-i1B {
     position: absolute;
     right: 40vmax;
     top: 4vmax;
@@ -29,18 +30,18 @@ html,body{
     align-items: center;
 }
 
-.handles{
+.profile-handles {
     position: absolute;
     right: 7vmax;
     top: 4vmax;
 }
 
-.handles a{
+.profile-handles a {
     margin-right: 20px;
-    font-size: 20px;  
+    font-size: 20px;
 }
 
-.box{
+.profile-box {
     height: auto;
     width: auto;
     border: 2px solid lightgray;
@@ -50,13 +51,13 @@ html,body{
     right: 20vmax;
 }
 
-.b1{
+.profile-b1 {
     padding: 10px 40px;
     border: 2px solid lightgray;
     background-color: white;
 }
 
-#flw-bt{
+#profile-flw-bt {
     padding: 10px 100px;
     background-color: #119df5;
     color: white;
@@ -65,27 +66,30 @@ html,body{
 
 /* 2nd section */
 
-.i2{
+.profile-i2 {
     display: flex;
     justify-content: space-between;
     margin-top: 50px;
 }
-.left{
+
+.profile-left {
     margin-left: 4vmax;
 }
-.share{
+
+.profile-share {
     border: 2px solid lightgrey;
     padding: 2vmax 2vmax;
     position: relative;
     margin-right: 5vmax;
 }
-.right{
+
+.profile-right {
     border: 2px solid lightgray;
     padding: 10px 30px;
     margin-right: 5vmax;
 }
 
-#share-input{
+#profile-share-input {
     width: 50vmax;
     height: 5vmax;
     padding: 5px;
@@ -93,7 +97,8 @@ html,body{
     resize: none;
     border-radius: 5px;
 }
-#shr{
+
+#profile-shr {
     background-color: #119df5;
     color: white;
     padding: 0.5vmax 2vmax;
@@ -103,42 +108,44 @@ html,body{
     right: 50px;
     top: 35%;
 }
-.posts{
+
+.profile-posts {
     display: flex;
     flex-direction: column;
     margin: 2vmax 5vmax 5vmax 0vmax;
 }
-#post-head{
+
+#profile-post-head {
     text-align: center;
     margin-top: 5vmax;
 }
-.post{
-    /* margin: 10px 0px; */
+
+.profile-post {
     font-size: 18px;
     border: 2px solid lightgray;
     padding: 20px;
 }
-.suggest{
+
+.profile-suggest {
     display: flex;
     margin-bottom: 30px;
 }
-.right h2{
+
+.profile-right h2 {
     text-align: center;
     margin-bottom: 30px;
 }
 
-#suggest-img{
+#profile-suggest-img {
     height: 4vmax;
     width: 4vmax;
     border-radius: 50%;
     margin-right: 2vmax;
 }
 
-
-
 /* 3rd section */
 
-.i3{
+.profile-i3 {
     display: flex;
     justify-content: space-around;
     align-items: center;
@@ -147,34 +154,41 @@ html,body{
     margin-top: 20px;
     background-color: #e2ecf0;
 }
-.s1 p{
+
+.profile-s1 p {
     margin: 15px 0px;
     max-width: 380px;
 }
-.s1 span{
+
+.profile-s1 span {
     font-weight: 600;
     margin-right: 5px;
 }
-.s2{
+
+.profile-s2 {
     display: flex;
     flex-direction: column;
 }
-.s2 a{
+
+.profile-s2 a {
     text-decoration: none;
     margin: 10px 0px;
     color: black;
 }
-.s2 i{
+
+.profile-s2 i {
     margin-right: 10px;
 }
-#lgt{
+
+#profile-lgt {
     padding: 10px 30px;
     border-radius: 5px;
     cursor: pointer;
-    background-color: rgba(0,0,0,0.6);
+    background-color: rgba(0, 0, 0, 0.6);
     color: white;
 }
-#lgt:hover{
-        background-color: white;
-        color: black;
+
+#profile-lgt:hover {
+    background-color: white;
+    color: black;
 }

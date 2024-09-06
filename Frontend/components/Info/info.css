@@ -1,44 +1,53 @@
-* {
+.info {
     background-image: url('https://i.pinimg.com/564x/7d/e1/4f/7de14f52151241903d8894bbbfef9d4d.jpg');
-    background-size: cover; 
+    background-size: cover;
     background-repeat: no-repeat;
-    background-position: center; 
+    background-position: center;
     overflow: hidden;
 }
-.details, .details-left, .details-right, .fields, label, input, textarea, button, h2,.field,select {
-    background-image: none; 
+
+.info-details,
+.info-details-left,
+.info-details-right,
+.info-fields,
+label,
+input,
+textarea,
+button,
+h2,
+.info-field,
+select {
+    background-image: none;
 }
 
-.details{
+.info-details {
     display: flex;
     justify-content: space-around;
-    background-image: url("https://i.pinimg.com/564x/7d/e1/4f/7de14f52151241903d8894bbbfef9d4d.jpg");
-    background-repeat: none;
-    background-position: center;
 }
 
-.details-left{
+.info-details-left {
     display: flex;
     flex-direction: column;
     justify-content: space-around;
     margin-left: 10vmax;
 }
-label{
+
+label {
     opacity: 0.7;
 }
-.fields{
+
+.info-fields {
     display: flex;
     flex-direction: column;
     margin: 10px 0px;
 }
 
-h2{
+h2 {
     text-align: center;
     margin: 25px 0px;
 }
 
-
-input{
+input {
     height: 1.5em;
     width: 30em;
     margin-top: 1em;
@@ -46,44 +55,49 @@ input{
     padding: 10px;
 }
 
-input[type=number], select{
+.info input[type=number],
+select {
     width: 7em;
 }
 
-.smaller-fields{
+.info-smaller-fields {
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
 }
-.smaller-fields label{
+
+.info-smaller-fields label {
     margin-right: 10px;
 }
-textarea{
+
+textarea {
     resize: none;
     margin-top: 1em;
     border-radius: 5px;
     padding: 10px;
 }
 
-#photo-upload{
+#info-photo-upload {
     height: 10vmax;
     width: 10vmax;
     border-radius: 50%;
 }
-#img-field{
+
+#info-img-field {
     flex-direction: row;
     margin-bottom: 5vmax;
 }
 
-button{
+.info-btn {
     padding: 1vmax;
     background-color: rgb(5, 92, 5);
     color: white;
     cursor: pointer;
     border-radius: 7px;
-    margin: 2vmax 7vmax;
+    margin: 2vmax 0vmax;
 }
-button:hover{
+
+.info-btn:hover {
     box-shadow: 2px 2px 5px rgb(20, 212, 20);
 }

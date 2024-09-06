@@ -6,7 +6,8 @@
 .main-box{
     display: flex;
     justify-content: center;
-    margin-top: 0.1%;
+    margin-top: 0.5%;
+    overflow: hidden;
 }
 .right{
     width: 40%;
@@ -47,7 +48,7 @@ input{
     width: 60%;
 }
 
-button{
+#sup-btn{
     cursor: pointer;
     width: 100%;
     height: 3em;
