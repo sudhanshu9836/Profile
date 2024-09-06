@@ -45,10 +45,16 @@ const userSchema = mongoose.Schema({
     },
     address:{
         type: String,
-        index: true
+        index: true,
+        required: true
     },
     occupation:{
         type: String,
+        index: true
+    },
+    password:{
+        type: String,
+        required: true,
         index: true
     },
     avatar:{
@@ -80,4 +86,4 @@ userSchema.methods.isPasswordCorrect = async function (password){
        return await bcrypt.compare(password, this.password)
 }
 
-export const user = mongoose.model('user', 'userSchema');
+export const User = mongoose.model('User', userSchema);
