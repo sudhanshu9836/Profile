@@ -62,3 +62,49 @@ export const registerUser = asyncHandler(async (req, res) => {
         new ApiResponse(201, "User successfully created", createdUser)
     );
 });
+
+export const loginUser = asyncHandler(async (req,res)=>{
+    console.log(req.body);
+    if(!username && !email){
+        throw new ApiError(400, "Username or email is required");
+    }
+
+    const user = await User.findOne({
+        $or : [{username},{email}]
+    })
+
+    if(!user){
+        throw new ApiError(400, 'User not found');
+    }
+
+    const isPasswordValid = await user.isPasswordCorrect(password);
+
+
+
+    if(!isPasswordValid){
+        throw new ApiError(401, 'Password is incorrect');
+    }
+
+    const loggedInUser = User.findById(user._id).select("-password");
+
+})
+
+export const logoutUser = asyncHandler(async (req,res)=>{
+    if(req.session){
+        req.session.destroy((err)=>{
+            if(err){
+                throw new ApiError(500, 'Failed to logout')
+            }
+            else{
+                res.clearCookie();
+                res.status(200).json({
+                    success: true,
+                    message: "Logged out Successfully"
+                })
+            }
+        })
+    }
+    else{
+        throw new ApiError(400, 'No sesssion to logout')
+    }
+})
