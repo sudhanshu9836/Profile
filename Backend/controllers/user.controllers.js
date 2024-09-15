@@ -4,6 +4,21 @@ import { ApiResponse } from "../utils/ApiResponse.js";
 import { User } from "../models/user.model.js";
 import { uploadOnCloudinary } from "../utils/cloudinary.js";
 
+const generateAccessAndRefreshToken = async(userid)=>{
+        try {
+            const user = await User.findById(userid);
+            const accessToken = user.generateAccessToken();
+            const refreshToken = user.generateRefreshToken();
+            user.refreshToken = refreshToken;
+            await user.save({validatBeforeSave: false});
+            return { accessToken, refreshToken}
+
+        } catch (error) {
+            throw new ApiError(500, 'Failed to generate Tokens')
+        }
+}
+
+
 export const registerUser = asyncHandler(async (req, res) => {
     const { name, username, age, gender, email, mobileNo, dob, password, address, occupation, fb, ig, lkin } = req.body;
 
@@ -52,7 +67,7 @@ export const registerUser = asyncHandler(async (req, res) => {
         lkin
     });
 
-    const createdUser = await User.findById(user._id).select("-password");
+    const createdUser = await User.findById(user._id).select("-password -refreshToken");
 
     if (!createdUser) {
         throw new ApiError(500, "Internal server error in saving data");
@@ -86,26 +101,40 @@ export const loginUser = asyncHandler(async (req,res)=>{
         throw new ApiError(401, 'Password is incorrect');
     }
 
-    const loggedInUser = User.findById(user._id).select("-password");
+    const  {accessToken, refreshToken} = generateAccessAndRefreshToken(user._id);
 
+    const loggedInUser = User.findById(user._id).select("-password -refreshToken");
+
+    const options = {
+        httpOnly: true,
+        secure: true
+    }
+
+    return res
+    .status(200)
+    .cookie( "accessToken", accessToken, options)
+    .cookie( "refreshToken", refreshToken, options)
+    .json(
+        new ApiResponse(200,{loggedInUser,accessToken,refreshToken}, "User logged in successfully")
+    )
 })
 
 export const logoutUser = asyncHandler(async (req,res)=>{
-    if(req.session){
-        req.session.destroy((err)=>{
-            if(err){
-                throw new ApiError(500, 'Failed to logout')
-            }
-            else{
-                res.clearCookie();
-                res.status(200).json({
-                    success: true,
-                    message: "Logged out Successfully"
-                })
-            }
-        })
+    await User.findByIdAndUpdate( req.user._id, {
+        $set: {
+            refreshToken: undefined,
+            new: true
+        }
+    })
+
+    const options = {
+        httpOnly: true,
+        secure: true
     }
-    else{
-        throw new ApiError(400, 'No sesssion to logout')
-    }
+
+    return res
+    .status(200)
+    .clearCookie("accessToken", options)
+    .clearCookie("refreshToken", options)
+    .json( new ApiResponse(200, "User loggedout Successfully"))
 })
