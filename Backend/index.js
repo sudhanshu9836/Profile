@@ -12,6 +12,8 @@ connectDB()
     ()=>{
         app.listen( process.env.PORT, (req,res)=>{
             console.log(`App is listening on port ${process.env.PORT}`);
+
+
         })
     }
 )
