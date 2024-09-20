@@ -10,9 +10,16 @@ const generateAccessAndRefreshToken = async (userid) => {
     const accessToken = user.generateAccessToken();
     const refreshToken = user.generateRefreshToken();
     user.refreshToken = refreshToken;
-    await user.save({validatBeforeSave: false});
+    try {
+      await user.save({validatBeforeSave: false});
+    } catch (error) {
+      console.log("Failed saving", error);
+    }
+    console.log("Access Token", accessToken);
+    console.log("Refresh Token", refreshToken);
     return {accessToken, refreshToken};
   } catch (error) {
+    console.log("Error during generation :", error);
     throw new ApiError(500, "Failed to generate Tokens");
   }
 };
@@ -36,9 +43,7 @@ export const registerUser = asyncHandler(async (req, res) => {
 
   // Validate required fields
   if (
-    [name, username, age, gender, email, mobileNo, password, address].some(
-      (field) => !field || field.trim() === ""
-    )
+    [email, mobileNo, password].some((field) => !field || field.trim() === "")
   ) {
     throw new ApiError(400, "Some fields are missing");
   }
@@ -53,20 +58,20 @@ export const registerUser = asyncHandler(async (req, res) => {
   }
 
   // Handle avatar upload
-  const avatarPath =
-    req.files && req.files.avatar && req.files.avatar[0]
-      ? req.files.avatar[0].path
-      : undefined;
+  // const avatarPath =
+  //   req.files && req.files.avatar && req.files.avatar[0]
+  //     ? req.files.avatar[0].path
+  //     : undefined;
 
-  if (!avatarPath) {
-    throw new ApiError(404, "Profile photo not found");
-  }
+  // if (!avatarPath) {
+  //   throw new ApiError(404, "Profile photo not found");
+  // }
 
-  const avatar = await uploadOnCloudinary(avatarPath);
+  // const avatar = await uploadOnCloudinary(avatarPath);
 
-  if (!avatar) {
-    throw new ApiError(500, "Profile photo not uploaded due to server error");
-  }
+  // if (!avatar) {
+  //   throw new ApiError(500, "Profile photo not uploaded due to server error");
+  // }
 
   // Create new user
   const user = await User.create({
@@ -74,7 +79,7 @@ export const registerUser = asyncHandler(async (req, res) => {
     username,
     mobileNo,
     email,
-    avatar: avatar.secure_url,
+    // avatar: avatar.secure_url,
     age,
     gender,
     dob,
@@ -120,10 +125,12 @@ export const loginUser = asyncHandler(async (req, res) => {
     throw new ApiError(401, "Password is incorrect");
   }
 
-  const {accessToken, refreshToken} = generateAccessAndRefreshToken(user._id);
+  const {accessToken, refreshToken} = await generateAccessAndRefreshToken(
+    user._id
+  );
 
-  if(!accessToken || !refreshToken){
-    throw new ApiError(500, 'No tokens are created')
+  if (!accessToken || !refreshToken) {
+    throw new ApiError(500, "No tokens are created");
   }
   const loggedInUser = User.findById(user._id).select(
     "-password -refreshToken"
@@ -131,7 +138,7 @@ export const loginUser = asyncHandler(async (req, res) => {
 
   const options = {
     httpOnly: true,
-    secure: process.env.NODE_ENV === 'production',
+    secure: process.env.NODE_ENV === "production",
   };
 
   return res
@@ -141,7 +148,7 @@ export const loginUser = asyncHandler(async (req, res) => {
     .json(
       new ApiResponse(
         200,
-        {loggedInUser, accessToken, refreshToken},
+        {email: loggedInUser.email},
         "User logged in successfully"
       )
     );
