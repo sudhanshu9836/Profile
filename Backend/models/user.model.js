@@ -1,113 +1,121 @@
 import mongoose from "mongoose";
-import bcrypt from 'bcrypt';
+import bcrypt from "bcrypt";
+import jwt from 'jsonwebtoken'
 
-const userSchema = mongoose.Schema({
-    name:{
-        type: String,
-        required: true,
-        trim: true,
-        index: true
+const userSchema = mongoose.Schema(
+  {
+    name: {
+      type: String,
+      required: true,
+      trim: true,
+      index: true,
     },
-    username:{
-        type: String,
-        unique: true,
-        lowercase: true,
-        required: true,
-        trim: true,
-        index: true
+    username: {
+      type: String,
+      unique: true,
+      lowercase: true,
+      required: true,
+      trim: true,
+      index: true,
     },
     age: {
-        type: Number,
-        required: true,
-        index: true
+      type: Number,
+      required: true,
+      index: true,
     },
-    gender:{
-        type: String,
-        required: true,
-        trim: true,
-        index: true
+    gender: {
+      type: String,
+      required: true,
+      trim: true,
+      index: true,
     },
-    email:{
-        type: String,
-        required: true,
-        trim: true,
-        index: true
+    email: {
+      type: String,
+      required: true,
+      trim: true,
+      index: true,
     },
-    mobileNo:{
-        type: String,
-        required: true,
-        trim: true,
-        index: true
+    mobileNo: {
+      type: String,
+      required: true,
+      trim: true,
+      index: true,
     },
-    dob:{
-        type: Date,
-        index: true
+    dob: {
+      type: Date,
+      index: true,
     },
-    address:{
-        type: String,
-        index: true,
-        required: true
+    address: {
+      type: String,
+      index: true,
+      required: true,
     },
-    occupation:{
-        type: String,
-        index: true
+    occupation: {
+      type: String,
+      index: true,
     },
-    password:{
-        type: String,
-        required: true,
-        index: true
+    password: {
+      type: String,
+      required: true,
+      index: true,
     },
-    avatar:{
-        type: String,
-        required: true
+    avatar: {
+      type: String,
+      required: true,
     },
-    fb:{
-        type: String,
-        index: true
+    fb: {
+      type: String,
+      index: true,
     },
-    ig:{
-        type: String,
-        index: true
+    ig: {
+      type: String,
+      index: true,
     },
-    lkin:{
-        type: String,
-        index: true
+    lkin: {
+      type: String,
+      index: true,
     },
-    refreshToken:{
-        token: String
-    }
-}, {timestamps:true});
+    refreshToken: {
+      token: String,
+    },
+  },
+  {timestamps: true}
+);
 
-userSchema.pre("save", async function (next){
-    if(this.isModified('password')){
-        this.password = await bcrypt.hash(this.password, 10);
-        next()
-    }
-})
+userSchema.pre("save", async function (next) {
+  if (this.isModified("password")) {
+    this.password = await bcrypt.hash(this.password, 10);
+    next();
+  }
+});
 
-userSchema.methods.isPasswordCorrect = async function (password){
-       return await bcrypt.compare(password, this.password)
-}
+userSchema.methods.isPasswordCorrect = async function (password) {
+  return await bcrypt.compare(password, this.password);
+};
 
-userSchema.methods.generateAccessToken = ()=>{
-    return jwt.sign({
-        _id: this._id,
-        username: this.username,
-        email: this.email
-    }, 
+userSchema.methods.generateAccessToken = () => {
+  return jwt.sign(
+    {
+      _id: this._id,
+      username: this.username,
+      email: this.email,
+    },
     process.env.ACCESS_TOKEN_SECRET,
     {
-        expiresIn: process.env.ACCESS_TOKEN_EXPIRY
-    })
-}
-userSchema.methods.generateRefreshToken = ()=>{
-    return jwt.sign({
-        _id: this._id,
-    }, 
+      expiresIn: process.env.ACCESS_TOKEN_EXPIRY,
+    }
+  );
+};
+userSchema.methods.generateRefreshToken = () => {
+  return jwt.sign(
+    {
+      _id: this._id,
+    },
     process.env.Refresh_TOKEN_SECRET,
     {
-        expiresIn: process.env.Refresh_TOKEN_EXPIRY
-    })
-}
+      expiresIn: process.env.Refresh_TOKEN_EXPIRY,
+    }
+  );
+};
 
-export const User = mongoose.model('User', userSchema);
+export const User = mongoose.model("User", userSchema);
