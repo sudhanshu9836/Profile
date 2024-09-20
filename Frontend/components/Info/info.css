@@ -1,9 +1,9 @@
 .info {
-    background-image: url('https://i.pinimg.com/564x/7d/e1/4f/7de14f52151241903d8894bbbfef9d4d.jpg');
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
-    overflow: hidden;
+  background-image: url("https://i.pinimg.com/564x/7d/e1/4f/7de14f52151241903d8894bbbfef9d4d.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  overflow: hidden;
 }
 
 .info-details,
@@ -17,87 +17,87 @@ button,
 h2,
 .info-field,
 select {
-    background-image: none;
+  background-image: none;
 }
 
 .info-details {
-    display: flex;
-    justify-content: space-around;
+  display: flex;
+  justify-content: space-around;
 }
 
 .info-details-left {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    margin-left: 10vmax;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  margin-left: 10vmax;
 }
 
 label {
-    opacity: 0.7;
+  opacity: 0.7;
 }
 
 .info-fields {
-    display: flex;
-    flex-direction: column;
-    margin: 10px 0px;
+  display: flex;
+  flex-direction: column;
+  margin: 10px 0px;
 }
 
 h2 {
-    text-align: center;
-    margin: 25px 0px;
+  text-align: center;
+  margin: 25px 0px;
 }
 
 input {
-    height: 1.5em;
-    width: 30em;
-    margin-top: 1em;
-    border-radius: 5px;
-    padding: 10px;
+  height: 1.5em;
+  width: 30em;
+  margin-top: 1em;
+  border-radius: 5px;
+  padding: 10px;
 }
 
-.info input[type=number],
+.info input[type="number"],
 select {
-    width: 7em;
+  width: 7em;
 }
 
 .info-smaller-fields {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .info-smaller-fields label {
-    margin-right: 10px;
+  margin-right: 10px;
 }
 
 textarea {
-    resize: none;
-    margin-top: 1em;
-    border-radius: 5px;
-    padding: 10px;
+  resize: none;
+  margin-top: 1em;
+  border-radius: 5px;
+  padding: 10px;
 }
 
 #info-photo-upload {
-    height: 10vmax;
-    width: 10vmax;
-    border-radius: 50%;
+  height: 10vmax;
+  width: 10vmax;
+  border-radius: 50%;
 }
 
 #info-img-field {
-    flex-direction: row;
-    margin-bottom: 5vmax;
+  flex-direction: row;
+  margin-bottom: 5vmax;
 }
 
 .info-btn {
-    padding: 1vmax;
-    background-color: rgb(5, 92, 5);
-    color: white;
-    cursor: pointer;
-    border-radius: 7px;
-    margin: 2vmax 0vmax;
+  padding: 1vmax;
+  background-color: rgb(5, 92, 5);
+  color: white;
+  cursor: pointer;
+  border-radius: 7px;
+  margin: 2vmax 0vmax;
 }
 
 .info-btn:hover {
-    box-shadow: 2px 2px 5px rgb(20, 212, 20);
+  box-shadow: 2px 2px 5px rgb(20, 212, 20);
 }
