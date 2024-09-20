@@ -4,8 +4,13 @@ import LoginPage from "../components/Login/loginPage";
 import Info from "../components/Info/info";
 import SignupPage from "../components/SignUp/signupPage";
 import Profile from "../components/Profile/profile";
+import Home from "../components/HomePage/home";
 
 const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <Home />,
+  },
   {
     path: "/login",
     element: <LoginPage />,

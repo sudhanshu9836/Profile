@@ -1,7 +1,29 @@
 import React from "react";
 import "./profile.css";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 function Profile() {
+  const navigate = useNavigate();
+  const logoutUser = async () => {
+    try {
+      const response = await fetch("http://localhost:3000/api/v1/user/logout", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        credentials: "include",
+      });
+
+      if (response.ok) {
+        toast("Logged out");
+        navigate("/login");
+      }
+    } catch (error) {
+      toast.error("Failed to logout");
+    }
+  };
+
   return (
     <>
       <div>
@@ -138,7 +160,9 @@ function Profile() {
               </a>
             </div>
             <div className="profile-s3">
-              <button id="profile-lgt">Logout</button>
+              <button id="profile-lgt" onClick={logoutUser}>
+                Logout
+              </button>
             </div>
           </div>
         </div>
