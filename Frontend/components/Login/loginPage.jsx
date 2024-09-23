@@ -50,22 +50,15 @@ function LoginPage() {
   return (
     <>
       <div className="main-box">
-        <div className="left">
-          <img
-            src="https://i.pinimg.com/564x/1b/5b/e3/1b5be34fa145729b51d1cf6b7d887090.jpg"
-            alt="image"
-            id="login-img"
-          />
-        </div>
-        <div className="right">
+        
           <form onSubmit={handleSubmit} >
-          <div className="r1">
+          <div className="x1">
             <h2>Login</h2>
             <p>
-              Welcome back ! Please login to your <br /> account
+              Welcome back ! Please login to your account
             </p>
           </div>
-          <div className="r2">
+          <div className="x2">
             <div className="field">
               <label htmlFor="email">email</label>
               <input
@@ -89,7 +82,7 @@ function LoginPage() {
               />
             </div>
           </div>
-          <div className="r3">
+          <div className="x3">
             <button id="loginButton" type="submit">Login</button>
             <p>
               New User ? <a href="/register">Sign Up</a>
@@ -97,7 +90,6 @@ function LoginPage() {
           </div>
           </form>
         </div>
-      </div>
     </>
   );
 }

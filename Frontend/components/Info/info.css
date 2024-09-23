@@ -1,24 +1,25 @@
+
+
 .info {
-  background-image: url("https://i.pinimg.com/564x/7d/e1/4f/7de14f52151241903d8894bbbfef9d4d.jpg");
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center;
-  overflow: hidden;
+  height: 100%;
+  width: 100%;
+  
+  background-color: black;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.info-details,
-.info-details-left,
-.info-details-right,
-.info-fields,
-label,
-input,
-textarea,
-button,
-h2,
-.info-field,
-select {
-  background-image: none;
+.info form{
+  margin-top: 2%;
+  border: 2px solid lightgray;
+  height: fit-content;
+  width: fit-content;
+  padding-bottom: 2vmax;
 }
+
+
 
 .info-details {
   display: flex;
@@ -30,6 +31,7 @@ select {
   flex-direction: column;
   justify-content: space-around;
   margin-left: 10vmax;
+  margin-right: 10vmax;
 }
 
 label {
@@ -76,6 +78,7 @@ textarea {
   margin-top: 1em;
   border-radius: 5px;
   padding: 10px;
+  width: 30vmax;
 }
 
 #info-photo-upload {
@@ -93,6 +96,7 @@ textarea {
   padding: 1vmax;
   background-color: rgb(5, 92, 5);
   color: white;
+  width: 32vmax;
   cursor: pointer;
   border-radius: 7px;
   margin: 2vmax 0vmax;
@@ -100,4 +104,66 @@ textarea {
 
 .info-btn:hover {
   box-shadow: 2px 2px 5px rgb(20, 212, 20);
+}
+
+
+@media screen and (max-width:1000px) {
+  .info{
+    padding: 3vmax 1vmax;
+  }
+  .info-details{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .info-details-right{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  #info-img-field{
+    /* transform: translateX(12vmax); */
+    margin-left: 10vmax;
+    margin-top: 3vmax;
+  }
+}
+
+
+@media screen and (max-width: 740px) {
+  .info-details-left{
+    margin: 0vmax 5vmax;
+  }
+  #info-img-field{
+    margin-left: 3vmax;
+  }
+}
+
+@media screen and (max-width: 610px) {
+  .info-details-left{
+    margin: 0vmax 2vmax;
+  }
+  .info input, .info textarea, .info-btn{
+    width: 20vmax;
+  }
+  .info-smaller-fields{
+    display: flex;
+    flex-direction: column;
+  }
+  .info select{
+    margin-top: 3vmax;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .info{
+    padding: 0;
+  }
+}
+@media screen and (max-width: 480px) {
+  .info form{
+    border: none;
+  }
+  #info-img-field{
+    margin-left: 7vmax;
+  }
 }

@@ -5,61 +5,41 @@ import { useNavigate } from "react-router-dom";
 
 function SignupPage() {
   const navigate = useNavigate();
+
   let [formData, setFormData] = useState({
     email: "",
     mobileNo: "",
     password: "",
+    confirmpassword: ""
   });
 
+
   const handleChange = (e) => {
-    const { id, value } = e.target;
-    setFormData({ ...formData, [id]: value });
+    const { name, value } = e.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
   };
-
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    try {
-      const response = await fetch(
-        "http://localhost:3000/api/v1/user/register",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            email: formData.email,
-            mobileNo: formData.mobileNo,
-            password: formData.password,
-          }),
-        }
-      );
+    const { email, mobileNo, password, confirmpassword } = formData;
 
-      const data = await response.json();
-      if (response.ok) {
-        toast("Registered").then(() => {
-          navigate("/info");
-        });
-      } else {
-        toast.error("Failed registartion");
-      }
-    } catch (error) {
-      toast.error("Error");
-      console.log("Error", error);
+    if(password == confirmpassword){
+      navigate("/info", { state: { email, mobileNo, password } });
+    }
+    else{
+      toast.error("Password mismatch")
     }
   };
 
   return (
     <>
       <div className="signup-main-box">
-        <img
-          src="https://i.pinimg.com/564x/be/59/bd/be59bdee35f2aec94d9e90a30ee5233d.jpg"
-          alt="image"
-          id="signupImage"
-        />
         <div className="right">
           <form onSubmit={handleSubmit}>
             <div className="r1">
-              <h2>SignUp</h2>
+              <h2>SignUp</h2> 
               <p>Join us today !</p>
             </div>
             <div className="r2">
@@ -83,7 +63,7 @@ function SignupPage() {
                   value={formData.mobileNo}
                   required
                   onChange={handleChange}
-                  name="contact"
+                  name="mobileNo"
                   placeholder="Enter your mobile number"
                 />
               </div>
@@ -99,22 +79,26 @@ function SignupPage() {
                   placeholder="Enter your password"
                 />
               </div>
-              {/* <div className="field">
-              <label htmlFor="confirmPassword">Confirm Password</label>
-              <input
-                type="password"
-                id="password"
-                name="confirmPassword"
-                placeholder="Enter your password again"
-              />
-            </div> */}
+              <div className="field">
+                <label htmlFor="password">Confirm Password</label>
+                <input
+                  type="password"
+                  id="confirmpassword"
+                  name="confirmpassword"
+                  value={formData.confirmpassword}
+                  required
+                  onChange={handleChange}
+                  placeholder="Enter your password again"
+                />
+              </div>
+              
             </div>
             <div className="r3">
               <button id="sup-btn" type="submit">
                 Sign Up
               </button>
               <p>
-                Have an acoount ? <a href="/login">Sign in</a>
+                Have an acoount ? <a href="/">Sign in</a>
               </p>
             </div>
           </form>

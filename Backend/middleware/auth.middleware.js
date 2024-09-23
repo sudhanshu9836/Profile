@@ -7,9 +7,6 @@ export const verifyJWT = asyncHandler(async (req, res, next) => {
   if (!req.cookies) {
     console.log("No cookie found");
   }
-  if (req.cookies) {
-    console.log("Your cookie", req.cookies);
-  }
 
   const token =
     req.cookies?.accessToken ||
