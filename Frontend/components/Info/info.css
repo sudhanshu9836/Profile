@@ -109,7 +109,7 @@ textarea {
 
 @media screen and (max-width:1000px) {
   .info{
-    padding: 3vmax 1vmax;
+    padding: 20vmax 1vmax;
   }
   .info-details{
     display: flex;
@@ -121,9 +121,11 @@ textarea {
     flex-direction: column;
     align-items: center;
   }
+  textarea{
+    width: 43vmax;
+  }
   #info-img-field{
-    /* transform: translateX(12vmax); */
-    margin-left: 10vmax;
+    margin-left: 27vmax;
     margin-top: 3vmax;
   }
 }
@@ -133,37 +135,54 @@ textarea {
   .info-details-left{
     margin: 0vmax 5vmax;
   }
-  #info-img-field{
-    margin-left: 3vmax;
-  }
 }
 
 @media screen and (max-width: 610px) {
+  .info{
+    padding: 30vmax 1vmax;
+  }
   .info-details-left{
     margin: 0vmax 2vmax;
   }
   .info input, .info textarea, .info-btn{
-    width: 20vmax;
+    width: 40vmax;
   }
   .info-smaller-fields{
     display: flex;
     flex-direction: column;
   }
+  #age, #gender{
+    width: 30vmax;
+  }
+  #gender{
+    height: 4vmax;
+    margin-top: 5vmax;
+  }
   .info select{
     margin-top: 3vmax;
+  }
+  #info-img-field {
+    margin-left: 18vmax;
   }
 }
 
 @media screen and (max-width: 480px) {
   .info{
-    padding: 0;
+    padding: 40vmax 1vmax;
   }
-}
-@media screen and (max-width: 480px) {
   .info form{
     border: none;
   }
   #info-img-field{
     margin-left: 7vmax;
+  }
+}
+
+@media screen and (max-width:300px){
+  .info{
+    padding: 5vmax 1vmax;
+  }
+  .info form{
+    transform: scale(0.7);
   }
 }

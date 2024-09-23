@@ -1,6 +1,11 @@
 @import url("https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap");
 
+input::placeholder{
+  color: black;
+}
+
+
 .main-box {
   display: flex;
   justify-content: center;
@@ -72,30 +77,29 @@ input {
   color: gray;
 }
 .x3 a {
-  color:yellow;
+  color: yellow;
 }
 
-input::placeholder{
+input::placeholder {
   color: black;
 }
 
-
 @media screen and (max-width: 500px) {
-  .x1 p{
+  .x1 p {
     margin-bottom: 5vmax;
   }
-  .main-box form{
+  .main-box form {
     border: none;
     transform: scale(0.9);
   }
 }
 @media screen and (max-width: 390px) {
-  .main-box form{
+  .main-box form {
     transform: scale(0.7);
   }
 }
 @media screen and (max-width: 300px) {
-  .main-box form{
+  .main-box form {
     transform: scale(0.6);
   }
 }

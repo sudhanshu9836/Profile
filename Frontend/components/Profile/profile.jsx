@@ -126,14 +126,48 @@ function Profile() {
           </div>
           <hr />
           <h2>Posts</h2>
-          <div className="post">Hey connections</div>
           <div className="post">
+            <div className="post-details">
+              <div className="post-details-left">
+              <img id="post-avatar" src="https://pbs.twimg.com/profile_images/1823398074032795648/VRptDOVa_400x400.jpg" alt="" />
+              <div>
+              <h3>Sudhanshu Tiwari</h3>
+              <p>@sudhanshu9836</p>
+              </div>
+              <p id="dateOfPost">&nbsp;&nbsp;&nbsp;. Sept 23 </p>
+              </div>
+              <div className="post-details-right">
+                <i class= "fa-regular fa-heart"></i>
+              <i class="fa-solid fa-ellipsis-vertical"></i>
+              </div>
+            </div>
+            <div className="post-content">
+            <p>Hey connections !</p>
+            </div>
+          </div>
+          <div className="post">
+            <div className="post-details">
+              <div className="post-details-left">
+              <img id="post-avatar" src="https://pbs.twimg.com/profile_images/1823398074032795648/VRptDOVa_400x400.jpg" alt="" />
+              <div>
+              <h3>Sudhanshu Tiwari</h3>
+              <p>@sudhanshu9836</p>
+              </div>
+              <p id="dateOfPost">&nbsp;&nbsp;&nbsp;. Sept 23 </p>
+              </div>
+              <div className="post-details-right">
+                <i class= "fa-regular fa-heart"></i>
+              <i class="fa-solid fa-ellipsis-vertical"></i>
+              </div>
+            </div>
+            <div className="post-content">
             <p>May I come in</p>
             <img
               id="postImage"
               src="https://i.pinimg.com/736x/2d/12/dd/2d12dd622717ab6e64d0a4e09f87afe9.jpg"
               alt=""
             />
+            </div>
           </div>
         </div>
         <div className="rightbar">

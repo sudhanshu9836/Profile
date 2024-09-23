@@ -1,4 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Warang+Citi&display=swap');
 
 :root {
   --bg-color: #000;
@@ -145,6 +146,7 @@ body {
   cursor: pointer;
 }
 
+
 .sidebar-bottom {
   position: absolute;
   bottom: 10vmax;
@@ -233,6 +235,44 @@ body {
   margin-left: 20px;
   margin-top: -5vmax;
 }
+.post-details{
+  display: flex;
+  justify-content: space-between;
+}
+.post-details-right{
+  margin-right: 5vmax;
+}
+.post-details-right i{
+  font-size: 1.1em;
+  cursor: pointer;
+  margin-right: 1vmax;
+}
+.post-details-left{
+  display: flex;
+}
+#post-avatar{
+  height: 3vmax;
+  width: 3vmax;
+  border-radius: 50%;
+  margin: 0vmax 1vmax 1vmax 0vmax;
+}
+.post-details-left h3{
+  margin: 0vmax;
+}
+.post-details-left p{
+  margin-top: 0.2vmax;
+  opacity: 0.7;
+}
+
+.post-content{
+  display: flex;
+  flex-direction: column;
+}
+.post-content p{
+  font-family: "Noto Sans Warang Citi", sans-serif;
+  margin-left: 3vmax;
+  margin-bottom: 2vmax;
+}
 
 /* Rightbar */
 .rightbar {
@@ -293,6 +333,9 @@ input::placeholder {
   .head {
     display: none;
   }
+  #dateOfPost{
+    display: none;
+  }
 }
 
 @media screen and (max-width: 540px) {
@@ -305,9 +348,12 @@ input::placeholder {
   .tabs button {
     margin-right: 5px;
   }
+  .post-details-left, .post-details-right{
+    transform: scale(0.8);
+  }
 }
 
-@media screen and (max-width: 440px) {
+@media screen and (max-width: 490px) {
   #logo {
     display: none;
   }
@@ -361,6 +407,12 @@ input::placeholder {
     margin-left: 5px;
     border: none;
   }
+  .post-details-left, .post-details-right{
+    transform: scale(1);
+  }
+  #dateOfPost{
+    display: block;
+  }
 
   #logoutBtn {
     border: none;
@@ -380,7 +432,11 @@ input::placeholder {
     margin-right: 1px;
   }
 }
-
+@media screen and (max-width: 320px) {
+  #dateOfPost{
+    display: none;
+  }
+}
 @media screen and (max-width: 270px) {
   .tabs button {
     transform: scale(0.8);

@@ -11,7 +11,7 @@ const generateAccessAndRefreshToken = async (userid) => {
     const refreshToken = user.generateRefreshToken();
     user.refreshToken = refreshToken;
     try {
-      await user.save({validatBeforeSave: false});
+      await user.save({validateBeforeSave: false});
     } catch (error) {
       console.log("Failed saving", error);
     }
@@ -56,20 +56,20 @@ export const registerUser = asyncHandler(async (req, res) => {
   }
 
   // Handle avatar upload
-  // const avatarPath =
-  //   req.files && req.files.avatar && req.files.avatar[0]
-  //     ? req.files.avatar[0].path
-  //     : undefined;
+  const avatarPath =
+    req.files && req.files.avatar && req.files.avatar[0]
+      ? req.files.avatar[0].path
+      : undefined;
 
-  // if (!avatarPath) {
-  //   throw new ApiError(404, "Profile photo not found");
-  // }
+  if (!avatarPath) {
+    throw new ApiError(404, "Profile photo not found");
+  }
 
-  // const avatar = await uploadOnCloudinary(avatarPath);
+  const avatar = await uploadOnCloudinary(avatarPath);
 
-  // if (!avatar) {
-  //   throw new ApiError(500, "Profile photo not uploaded due to server error");
-  // }
+  if (!avatar) {
+    throw new ApiError(500, "Profile photo not uploaded due to server error");
+  }
 
   // Create new user
   const user = await User.create({
@@ -77,7 +77,7 @@ export const registerUser = asyncHandler(async (req, res) => {
     username,
     mobileNo,
     email,
-    // avatar: avatar.secure_url,
+    avatar: avatar.secure_url,
     age,
     gender,
     dob,
@@ -129,7 +129,7 @@ export const loginUser = asyncHandler(async (req, res) => {
   if (!accessToken || !refreshToken) {
     throw new ApiError(500, "No tokens are created");
   }
-  const loggedInUser = User.findById(user._id).select(
+  const loggedInUser = await User.findById(user._id).select(
     "-password -refreshToken"
   );
 
