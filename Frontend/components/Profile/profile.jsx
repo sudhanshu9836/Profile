@@ -6,6 +6,12 @@ import { toast } from "react-toastify";
 function Profile() {
   const navigate = useNavigate();
   const userData = JSON.parse(localStorage.getItem('user'))
+  
+  
+
+  const [users, setUsers] = useState([]);
+
+
   const user = userData.data.loggedInUser;
   if (!user) {
     return (
@@ -16,8 +22,7 @@ function Profile() {
     );
   }
 
-  console.log(user)
-
+  const userId = user._id;
 
 
   const handleBack = () => {
@@ -42,6 +47,31 @@ function Profile() {
       toast.error("Failed to logout");
     }
   };
+
+  // Suggestions
+
+  
+  useEffect(() => {
+    const fetchUsers = async () => {
+      try {
+        const response = await fetch('http://localhost:3000/api/v1/user/suggestions', {
+          method: 'GET',
+        });
+        const data = await response.json();
+        if (response.ok) {
+          const allUsers = data.data.users;
+          const suggestedUsers = allUsers.filter(i=>i._id != userId);
+          setUsers(suggestedUsers); 
+        } else {
+          alert('Failed to fetch users');
+        }
+      } catch (error) {
+        alert('Error in fetching');
+      }
+    };
+    fetchUsers();
+  }, []);
+  
 
   // Buttons sidebar
   const [dots, setDots] = useState(false);
@@ -190,50 +220,15 @@ function Profile() {
           </div>
           <h2>Suggestions</h2>
           <div className="suggestions">
-            <div className="suggest">
-              <img
-                src="https://i.pinimg.com/736x/0a/8a/14/0a8a14b8ed9d91406faea6fb36efbab0.jpg"
-                alt="img"
-                id="suggestImage"
-              />
-              <div className="suggestDetail">
-                <p id="suggestName">Tommy</p>
-                <p id="suggestUsername">@toms</p>
-              </div>
-            </div>
-            <div className="suggest">
-              <img
-                src="https://i.pinimg.com/736x/43/d5/50/43d5500f7a6d1da81e3231aad7db346e.jpg"
-                alt="img"
-                id="suggestImage"
-              />
-              <div className="suggestDetail">
-                <p id="suggestName">Carl</p>
-                <p id="suggestUsername">@cjohnsons</p>
-              </div>
-            </div>
-            <div className="suggest">
-              <img
-                src="https://i.pinimg.com/564x/02/e7/49/02e749ac2486c8c3fbe901d0a1fbf16a.jpg"
-                alt="img"
-                id="suggestImage"
-              />
-              <div className="suggestDetail">
-                <p id="suggestName">Mr Dull</p>
-                <p id="suggestUsername">@lazy_boy_69</p>
-              </div>
-            </div>
-            <div className="suggest">
-              <img
-                src="https://i.pinimg.com/564x/f7/ab/ae/f7abae97b56e8942383999eef3d7eb29.jpg"
-                alt="img"
-                id="suggestImage"
-              />
-              <div className="suggestDetail">
-                <p id="suggestName">Hermione</p>
-                <p id="suggestUsername">@pookies</p>
-              </div>
-            </div>
+  {users.map((suggestion) => (
+    <div className="suggest" key={suggestion._id}>
+      <img src={suggestion.avatar} alt="img" id="suggestImage" />
+      <div className="suggestDetail">
+        <p id="suggestName">{suggestion.name}</p>
+        <p id="suggestUsername">@{suggestion.username}</p>
+      </div>
+    </div>
+  ))}
           </div>
         </div>
       </div>
