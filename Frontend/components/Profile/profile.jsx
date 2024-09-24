@@ -5,6 +5,20 @@ import { toast } from "react-toastify";
 
 function Profile() {
   const navigate = useNavigate();
+  const userData = JSON.parse(localStorage.getItem('user'))
+  const user = userData.data.loggedInUser;
+  if (!user) {
+    return (
+      <div style={styles.container}>
+        <h2>User Information</h2>
+        <p>No user data available.</p>
+      </div>
+    );
+  }
+
+  console.log(user)
+
+
 
   const handleBack = () => {
     navigate(-1);
@@ -105,18 +119,18 @@ function Profile() {
             <button onClick={handleBack}>
               <i class="fa-solid fa-arrow-left"></i>
             </button>
-            <span>Sudhanshu Tiwari</span>
+            <span>{user.name}</span>
           </div>
           <div className="cover-image"></div>
           <img
-            src="https://pbs.twimg.com/profile_images/1823398074032795648/VRptDOVa_400x400.jpg"
+            src={user.avatar}
             id="avatarImage"
             alt="avatar"
           />
           <div className="profile-details">
-            <h3 id="name">Sudhanshu Tiwari</h3>
-            <p id="username">@sudhanshu9836</p>
-            <p id="bio">Developer</p>
+            <h3 id="name">{user.name}</h3>
+            <p id="username">@{user.username}</p>
+            <p id="bio">{user.occupation}</p>
             <div className="connections">
               <span id="following-count">93 followings</span> &nbsp;&nbsp;&nbsp;
               <span id="follower-count">122 followers</span>
@@ -129,10 +143,10 @@ function Profile() {
           <div className="post">
             <div className="post-details">
               <div className="post-details-left">
-              <img id="post-avatar" src="https://pbs.twimg.com/profile_images/1823398074032795648/VRptDOVa_400x400.jpg" alt="" />
+              <img id="post-avatar" src={user.avatar} alt="" />
               <div>
-              <h3>Sudhanshu Tiwari</h3>
-              <p>@sudhanshu9836</p>
+              <h3>{user.name}</h3>
+              <p>@{user.username}</p>
               </div>
               <p id="dateOfPost">&nbsp;&nbsp;&nbsp;. Sept 23 </p>
               </div>
@@ -148,10 +162,10 @@ function Profile() {
           <div className="post">
             <div className="post-details">
               <div className="post-details-left">
-              <img id="post-avatar" src="https://pbs.twimg.com/profile_images/1823398074032795648/VRptDOVa_400x400.jpg" alt="" />
+              <img id="post-avatar" src={user.avatar} alt="" />
               <div>
-              <h3>Sudhanshu Tiwari</h3>
-              <p>@sudhanshu9836</p>
+              <h3>{user.name}</h3>
+              <p>@{user.username}</p>
               </div>
               <p id="dateOfPost">&nbsp;&nbsp;&nbsp;. Sept 23 </p>
               </div>

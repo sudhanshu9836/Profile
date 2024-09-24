@@ -145,7 +145,7 @@ export const loginUser = asyncHandler(async (req, res) => {
     .json(
       new ApiResponse(
         200,
-        {email: loggedInUser.email},
+        {loggedInUser},
         "User logged in successfully"
       )
     );

@@ -37,6 +37,7 @@ function LoginPage() {
       const data = await response.json();
       if(response.ok){
         toast.success("Logged in Successfully")
+          localStorage.setItem('user', JSON.stringify(data))
           navigate("/profile");
       }else{
         toast.error("Login failed");
