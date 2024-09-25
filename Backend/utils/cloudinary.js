@@ -37,7 +37,7 @@ const uploadOnCloudinary = async (localFilePath) => {
 
     // Log the error and rethrow
     console.error("Cloudinary upload error:", error.message);
-    throw new ApiError(500, "Profile photo upload failed: " + error.message);
+
   }
 };
 

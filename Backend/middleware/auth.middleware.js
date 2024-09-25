@@ -8,6 +8,7 @@ export const verifyJWT = asyncHandler(async (req, res, next) => {
     console.log("No cookie found");
   }
 
+
   const token =
     req.cookies?.accessToken ||
     req.header("Authorization")?.replace("Bearer ", "");
@@ -33,6 +34,6 @@ export const verifyJWT = asyncHandler(async (req, res, next) => {
     throw new ApiError(401, "Authentication failed: User not found.");
   }
 
-  req.user = user; // Attach user info to req object
-  next(); // Proceed to the next middleware
+  req.user = user;
+  next(); 
 });

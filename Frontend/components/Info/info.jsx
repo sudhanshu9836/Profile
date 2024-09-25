@@ -18,10 +18,9 @@ function Info() {
     age: "",
     gender: "",
     dob: "",
-    avatar: "",
     address: "",
     occupation: "",
-    avatar: null, 
+    avatar: null,
     facebook: "",
     instagram: "",
     linkedin: "",
@@ -52,10 +51,13 @@ function Info() {
       dataToSend.append(key, formData[key]);
     }
     try {
-      const response = await fetch("http://localhost:3000/api/v1/user/register", {
-        method: "POST",
-        body: dataToSend,
-      });
+      const response = await fetch(
+        "http://localhost:3000/api/v1/user/register",
+        {
+          method: "POST",
+          body: dataToSend,
+        }
+      );
 
       const data = await response.json();
       if (response.ok) {
@@ -78,22 +80,43 @@ function Info() {
           <div className="info-details-left">
             <div className="info-fields">
               <label htmlFor="name">Name:</label>
-              <input type="text" id="name" placeholder="Enter your name" required onChange={handleChange} />
+              <input
+                type="text"
+                id="name"
+                placeholder="Enter your name"
+                required
+                onChange={handleChange}
+              />
             </div>
 
             <div className="info-fields">
               <label htmlFor="username">Username:</label>
-              <input type="text" id="username" required onChange={handleChange} />
+              <input
+                type="text"
+                id="username"
+                required
+                onChange={handleChange}
+              />
             </div>
 
             <div className="info-fields info-smaller-fields">
               <div className="info-field">
                 <label htmlFor="age">Age:</label>
-                <input type="number" id="age" required onChange={handleChange} />
+                <input
+                  type="number"
+                  id="age"
+                  required
+                  onChange={handleChange}
+                />
               </div>
               <div className="info-field">
                 <label htmlFor="gender">Gender:</label>
-                <select id="gender" value={formData.gender} required onChange={handleChange}>
+                <select
+                  id="gender"
+                  value={formData.gender}
+                  required
+                  onChange={handleChange}
+                >
                   <option value="" disabled>
                     Select your gender
                   </option>
@@ -112,13 +135,22 @@ function Info() {
 
             <div className="info-fields">
               <label htmlFor="occupation">Occupation:</label>
-              <input type="text" id="occupation" required onChange={handleChange} />
+              <input
+                type="text"
+                id="occupation"
+                required
+                onChange={handleChange}
+              />
             </div>
           </div>
           <div className="info-details-right">
             <div className="info-fields" id="info-img-field">
               {imagePreview ? (
-                <img src={imagePreview} alt="profile preview" id="info-photo-upload" />
+                <img
+                  src={imagePreview}
+                  alt="profile preview"
+                  id="info-photo-upload"
+                />
               ) : (
                 <img
                   src="https://i.pinimg.com/564x/d2/98/4e/d2984ec4b65a8568eab3dc2b640fc58e.jpg"
@@ -135,11 +167,16 @@ function Info() {
             </div>
             <div className="info-fields">
               <label htmlFor="address">Address:</label>
-              <textarea id="address" rows="4" required onChange={handleChange}></textarea>
+              <textarea
+                id="address"
+                rows="4"
+                required
+                onChange={handleChange}
+              ></textarea>
             </div>
-        <button className="info-btn" type="submit">
-          Save Changes and Register
-        </button>
+            <button className="info-btn" type="submit">
+              Save Changes and Register
+            </button>
           </div>
         </div>
       </form>

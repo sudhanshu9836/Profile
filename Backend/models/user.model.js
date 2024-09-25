@@ -2,6 +2,7 @@ import mongoose from "mongoose";
 import bcrypt from "bcrypt";
 import dotenv from "dotenv";
 import jwt from "jsonwebtoken";
+import { Post } from "./post.model.js";
 
 dotenv.config({
   path: "./.env",
@@ -29,7 +30,6 @@ const userSchema = mongoose.Schema(
     },
     gender: {
       type: String,
-      // required: true,
       trim: true,
       index: true,
     },
@@ -37,11 +37,13 @@ const userSchema = mongoose.Schema(
       type: String,
       required: true,
       trim: true,
+      unique: true,
       index: true,
     },
     mobileNo: {
       type: String,
       required: true,
+      unique: true,
       trim: true,
       index: true,
     },
@@ -52,7 +54,6 @@ const userSchema = mongoose.Schema(
     address: {
       type: String,
       index: true,
-      // required: true,
     },
     occupation: {
       type: String,
@@ -65,8 +66,12 @@ const userSchema = mongoose.Schema(
     },
     avatar: {
       type: String,
-      // required: true,
+      required: true,
     },
+    posts:[{
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Post"
+    }],
     fb: {
       type: String,
       index: true,

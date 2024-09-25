@@ -1,5 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&display=swap");
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Warang+Citi&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+Warang+Citi&display=swap");
 
 :root {
   --bg-color: #000;
@@ -146,7 +146,6 @@ body {
   cursor: pointer;
 }
 
-
 .sidebar-bottom {
   position: absolute;
   bottom: 10vmax;
@@ -233,40 +232,40 @@ body {
   margin-left: 20px;
   margin-top: -5vmax;
 }
-.post-details{
+.post-details {
   display: flex;
   justify-content: space-between;
 }
-.post-details-right{
+.post-details-right {
   margin-right: 5vmax;
 }
-.post-details-right i{
+.post-details-right i {
   font-size: 1.1em;
   cursor: pointer;
   margin-right: 1vmax;
 }
-.post-details-left{
+.post-details-left {
   display: flex;
 }
-#post-avatar{
+#post-avatar {
   height: 3vmax;
   width: 3vmax;
   border-radius: 50%;
   margin: 0vmax 1vmax 1vmax 0vmax;
 }
-.post-details-left h3{
+.post-details-left h3 {
   margin: 0vmax;
 }
-.post-details-left p{
+.post-details-left p {
   margin-top: 0.2vmax;
   opacity: 0.7;
 }
 
-.post-content{
+.post-content {
   display: flex;
   flex-direction: column;
 }
-.post-content p{
+.post-content p {
   font-family: "Noto Sans Warang Citi", sans-serif;
   margin-left: 3vmax;
   margin-bottom: 2vmax;
@@ -323,6 +322,51 @@ input::placeholder {
   margin-top: 3vmax;
 }
 
+.postModel {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  z-index: 999;
+  border: 2px solid lightgray;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 2px 10px white;
+  position: absolute;
+  height: fit-content;
+  padding: 2vmax 5vmax;
+  width: 44vmax;
+  top: 20%;
+  left: 18.5vmax;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.postModel textarea {
+  height: 10vmax;
+  font-size: 1.2em;
+  width: 30vmax;
+  font-family: "Noto Sans Warang Citi", sans-serif;
+  margin-bottom: 2vmax;
+}
+
+#closeDialog {
+  position: absolute;
+  right: 2vmax;
+  top: 1vmax;
+  cursor: pointer;
+  border-radius: 20px;
+  transform: scale(1.2);
+  background-color: red;
+  color: white;
+}
+#addImgBtn {
+  margin: 2vmax;
+  position: absolute;
+  bottom: 5.5vmax;
+  right: 10vmax;
+  cursor: pointer;
+  border: none;
+}
+
 /* Media Queries */
 
 @media screen and (max-width: 650px) {
@@ -332,7 +376,7 @@ input::placeholder {
   .head {
     display: none;
   }
-  #dateOfPost{
+  #dateOfPost {
     display: none;
   }
 }
@@ -347,7 +391,8 @@ input::placeholder {
   .tabs button {
     margin-right: 5px;
   }
-  .post-details-left, .post-details-right{
+  .post-details-left,
+  .post-details-right {
     transform: scale(0.8);
   }
 }
@@ -406,10 +451,11 @@ input::placeholder {
     margin-left: 5px;
     border: none;
   }
-  .post-details-left, .post-details-right{
+  .post-details-left,
+  .post-details-right {
     transform: scale(1);
   }
-  #dateOfPost{
+  #dateOfPost {
     display: block;
   }
 
@@ -432,7 +478,7 @@ input::placeholder {
   }
 }
 @media screen and (max-width: 320px) {
-  #dateOfPost{
+  #dateOfPost {
     display: none;
   }
 }

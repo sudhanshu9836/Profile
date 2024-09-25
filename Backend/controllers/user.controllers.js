@@ -37,6 +37,7 @@ export const registerUser = asyncHandler(async (req, res) => {
     fb,
     ig,
     lkin,
+    posts,
   } = req.body;
 
   // Validate required fields
@@ -85,13 +86,13 @@ export const registerUser = asyncHandler(async (req, res) => {
     address,
     password,
     fb,
+    posts,
     ig,
     lkin,
   });
 
   const createdUser = await User.findById(user._id).select(
-    "-password -refreshToken"
-  );
+    "-password -refreshToken").populate("posts");
 
   if (!createdUser) {
     throw new ApiError(500, "Internal server error in saving data");
@@ -130,8 +131,9 @@ export const loginUser = asyncHandler(async (req, res) => {
     throw new ApiError(500, "No tokens are created");
   }
   const loggedInUser = await User.findById(user._id).select(
-    "-password -refreshToken"
-  );
+    "-password -refreshToken" )
+    .populate("posts"); 
+ 
 
   const options = {
     httpOnly: true,
