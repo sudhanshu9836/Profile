@@ -3,7 +3,7 @@ import { upload } from "../middleware/multer.middleware.js";
 import { loginUser, logoutUser, registerUser } from "../controllers/user.controllers.js";
 import { verifyJWT } from "../middleware/auth.middleware.js";
 import { suggestions } from "../controllers/suggestions.controllers.js";
-import { addNewPost } from "../controllers/post.controllers.js";
+import { addNewPost, deletePost } from "../controllers/post.controllers.js";
 
 const router = Router();
 
@@ -25,6 +25,6 @@ router.route("/post").post(upload.fields([
     }
 ]),verifyJWT,addNewPost)
 
-
+router.route("/post/delete").post(verifyJWT, deletePost)
 
 export default router;

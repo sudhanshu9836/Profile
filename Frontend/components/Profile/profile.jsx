@@ -162,6 +162,40 @@ function Profile() {
     setIsDialogOpen(false);
   };
 
+  // Delete post request
+
+  const [idToDel, setIdToDel] = useState('');
+
+  const deletePostRequest = async(e)=>{
+
+    try {
+      const response = await fetch("http://localhost:3000/api/v1/user/post/delete",{
+        method: 'Post',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          id: idToDel
+        }),
+        credentials:'include'
+      }
+      )
+
+      if(response.ok){
+        toast.success("Post deleted successfully")
+        setIdToDel('')
+        setPosts((prevPosts) => prevPosts.filter(post => post._id !== idToDel))
+      }
+      else{
+        toast.error("Unexpected error in deleting post")
+      }
+    } catch (error) {
+      console.log("Error in deleting post:", error)
+    }
+
+  }
+
+  const[isPostPopup, setIsPostPopup] = useState(false);
   return (
     <>
       <div className="profilePage" id="profilePage">
@@ -282,7 +316,14 @@ function Profile() {
                   </div>
                   <div className="post-details-right">
                     <i class="fa-regular fa-heart"></i>
-                    <i class="fa-solid fa-ellipsis-vertical"></i>
+                    <i class="fa-solid fa-ellipsis-vertical" id="post-popup-dots" 
+                    onClick={()=>{setIsPostPopup(!isPostPopup)}}></i>
+                    <div className="post-popup" style={{display: isPostPopup?'block':'none'}}>
+                    <button id="delete-btn" onClick={()=>{
+                      setIdToDel(userPost._id);
+                      deletePostRequest();
+                    }}><i class="fa-solid fa-trash"></i></button>
+                    </div>
                   </div>
                 </div>
                 <div className="post-content">

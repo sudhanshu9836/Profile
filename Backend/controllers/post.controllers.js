@@ -48,3 +48,21 @@ export const addNewPost = asyncHandler(async (req, res) => {
     console.log("Error", error);
   }
 });
+
+export const deletePost = asyncHandler(async(req,res)=>{
+  try {
+    let {id} = req.body;
+    const post = await Post.findByIdAndDelete(id);
+
+    if(!post){
+      throw new ApiError(400, 'Post not found');
+    }
+
+    return res
+    .status(200)
+    .json({ message: 'Post deleted successfully' });
+
+  } catch (error) {
+    return res.status(500).json({ message: 'Server error', error: error.message })
+  }
+})
