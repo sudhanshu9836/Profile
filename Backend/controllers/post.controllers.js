@@ -15,19 +15,20 @@ export const addNewPost = asyncHandler(async (req, res) => {
         ? req.files.postImage[0].path
         : undefined;
 
-    if (!postImagePath) {
-      throw new ApiError(404, "Post Image not found");
-    }
+        let postImage = null;
 
-    const postImage = await uploadOnCloudinary(postImagePath);
+        if(postImagePath){
+          postImage = await uploadOnCloudinary(postImagePath);
+          if (!postImage) {
+            throw new ApiError(500, "PostImage not uploaded due to server error");
+          }
+        }
 
-    if (!postImage) {
-      throw new ApiError(500, "PostImage not uploaded due to server error");
-    }
+    
 
     const newPost = new Post({
-      content: postContent,
-      image: postImage.secure_url,
+      content: postContent || null,
+      image:  postImage?postImage.secure_url:null,
       date: new Date(),
       likes: [],
     });

@@ -27,4 +27,5 @@ router.route("/post").post(upload.fields([
 
 router.route("/post/delete").post(verifyJWT, deletePost)
 
+
 export default router;

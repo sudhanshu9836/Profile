@@ -18,6 +18,8 @@ app.use(cookieParser());
 // Importing
 
 import userRouter from "./routes/user.routes.js";
+import profileRouter from "./routes/profile.routes.js"
 app.use("/api/v1/user", userRouter);
+app.use("/api/v1/profiles", profileRouter)
 
 export {app};

@@ -12,14 +12,10 @@ function Profile() {
     postImage: "",
   });
 
-  const fileInputRef = useRef(null);
-  const handleAddImgClick = () => {
-    fileInputRef.current.click();
-  };
 
   const [users, setUsers] = useState([]);
 
-  const user = userData.data.loggedInUser;
+  const user = userData?.data?.loggedInUser;
   if (!user) {
     return (
       <div style={styles.container}>
@@ -41,7 +37,7 @@ function Profile() {
   const formatDate = (dateString) => {
     const date = new Date(dateString);
     const options = { month: "short", day: "numeric" };
-    return date.toLocaleString("en-US", options); // This will give you "Sep 26"
+    return date.toLocaleString("en-US", options); 
   };
 
   // Logout user
@@ -92,8 +88,13 @@ function Profile() {
       const data = await response.json();
       if (response.ok) {
         toast.success("Post Added");
-        setPosts((prevPosts) => [...prevPosts, data.data]);
+        setPosts((prevPosts) => [data.data, ...prevPosts]);
+        setFormData({
+          postContent: "",
+          postImage: "",
+        });
         setIsDialogOpen(!isDialogOpen);
+
       } else {
         toast.error(data.message || "Failed to add post");
       }
@@ -195,7 +196,7 @@ function Profile() {
 
   }
 
-  const[isPostPopup, setIsPostPopup] = useState(false);
+  const [postPopupId, setPostPopupId] = useState(null);
   return (
     <>
       <div className="profilePage" id="profilePage">
@@ -317,8 +318,8 @@ function Profile() {
                   <div className="post-details-right">
                     <i class="fa-regular fa-heart"></i>
                     <i class="fa-solid fa-ellipsis-vertical" id="post-popup-dots" 
-                    onClick={()=>{setIsPostPopup(!isPostPopup)}}></i>
-                    <div className="post-popup" style={{display: isPostPopup?'block':'none'}}>
+                    onClick={()=>{setPostPopupId(userPost._id === postPopupId ? null : userPost._id)}}></i>
+                    <div className="post-popup" style={{display: postPopupId === userPost._id ? "block" : "none"}}>
                     <button id="delete-btn" onClick={()=>{
                       setIdToDel(userPost._id);
                       deletePostRequest();
@@ -341,7 +342,9 @@ function Profile() {
           <h2>Suggestions</h2>
           <div className="suggestions">
             {users.map((suggestion) => (
-              <div className="suggest" key={suggestion._id}>
+              <div className="suggest" key={suggestion._id} onClick={()=>{
+                navigate("/otherProfile",{state: suggestion._id})
+              }}>
                 <img src={suggestion.avatar} alt="img" id="suggestImage" />
                 <div className="suggestDetail">
                   <p id="suggestName">{suggestion.name}</p>
