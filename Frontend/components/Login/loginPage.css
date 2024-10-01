@@ -99,3 +99,8 @@ input::placeholder {
     transform: scale(0.6);
   }
 }
+
+
+input::placeholder {
+  color: black !important;
+}

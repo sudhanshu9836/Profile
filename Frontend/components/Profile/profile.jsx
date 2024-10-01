@@ -12,9 +12,8 @@ function Profile() {
     postImage: "",
   });
 
-
   const [users, setUsers] = useState([]);
-
+  const [loader, setLoader] = useState(false);
   const user = userData?.data?.loggedInUser;
   if (!user) {
     return (
@@ -28,22 +27,19 @@ function Profile() {
   const userId = user._id;
 
   const [posts, setPosts] = useState(user.posts);
-  const handleBack = () => {
-    navigate(-1);
-  };
 
   // Format Date
 
   const formatDate = (dateString) => {
     const date = new Date(dateString);
     const options = { month: "short", day: "numeric" };
-    return date.toLocaleString("en-US", options); 
+    return date.toLocaleString("en-US", options);
   };
 
   // Logout user
   const logoutUser = async () => {
     try {
-      const response = await fetch("http://localhost:3000/api/v1/user/logout", {
+      const response = await fetch("/api/v1/user/logout", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -80,7 +76,7 @@ function Profile() {
     formDataToSend.append("postContent", formData.postContent);
     formDataToSend.append("postImage", formData.postImage);
     try {
-      const response = await fetch("http://localhost:3000/api/v1/user/post", {
+      const response = await fetch("/api/v1/user/post", {
         method: "POST",
         body: formDataToSend,
         credentials: "include",
@@ -94,7 +90,6 @@ function Profile() {
           postImage: "",
         });
         setIsDialogOpen(!isDialogOpen);
-
       } else {
         toast.error(data.message || "Failed to add post");
       }
@@ -108,22 +103,19 @@ function Profile() {
   useEffect(() => {
     const fetchUsers = async () => {
       try {
-        const response = await fetch(
-          "http://localhost:3000/api/v1/user/suggestions",
-          {
-            method: "GET",
-          }
-        );
+        const response = await fetch("/api/v1/user/suggestions", {
+          method: "GET",
+        });
         const data = await response.json();
         if (response.ok) {
           const allUsers = data.data.users;
           const suggestedUsers = allUsers.filter((i) => i._id != userId);
           setUsers(suggestedUsers);
         } else {
-          alert("Failed to fetch users");
+          toast.error("Failed to fetch users");
         }
       } catch (error) {
-        alert("Error in fetching");
+        toast.error("Error in fetching");
       }
     };
     fetchUsers();
@@ -154,6 +146,7 @@ function Profile() {
 
   // Model Post
   const [isDialogOpen, setIsDialogOpen] = useState(false);
+  const [isSearchDialogOpen, setIsSearchDialogOpen] = useState(false);
 
   const openDialog = () => {
     setIsDialogOpen(true);
@@ -162,41 +155,93 @@ function Profile() {
   const closeDialog = () => {
     setIsDialogOpen(false);
   };
+  const openSearchDialog = () => {
+    setIsSearchDialogOpen(true);
+  };
+
+  const closeSearchDialog = () => {
+    setIsSearchDialogOpen(false);
+  };
+
+  // Search User Profile
+
+  const [searchUsername, setSearchUsername] = useState("");
+
+  const [searchProfile, setSearchProfile] = useState(null);
+
+  const searchProfileRequest = async (e) => {
+    e.preventDefault();
+    setLoader(true);
+    try {
+      const response = await fetch("/api/v1/profiles/search", {
+        method: "post",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          username: searchUsername,
+        }),
+      });
+
+      if (response.ok) {
+        toast.success("User found");
+        const data = await response.json();
+        setSearchProfile(data.data);
+      } else {
+        setSearchProfile(null);
+      }
+    } catch (error) {
+      toast.error("Something went wrong while searching");
+      console.log("Error : ", error);
+    }
+    finally{
+      setLoader(false);
+    }
+  };
 
   // Delete post request
 
-  const [idToDel, setIdToDel] = useState('');
+  const [idToDel, setIdToDel] = useState("");
 
-  const deletePostRequest = async(e)=>{
-
+  const deletePostRequest = async (e) => {
     try {
-      const response = await fetch("http://localhost:3000/api/v1/user/post/delete",{
-        method: 'Post',
+      const response = await fetch("/api/v1/user/post/delete", {
+        method: "Post",
         headers: {
-          'Content-Type': 'application/json'
+          "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          id: idToDel
+          id: idToDel,
         }),
-        credentials:'include'
-      }
-      )
+        credentials: "include",
+      });
 
-      if(response.ok){
-        toast.success("Post deleted successfully")
-        setIdToDel('')
-        setPosts((prevPosts) => prevPosts.filter(post => post._id !== idToDel))
-      }
-      else{
-        toast.error("Unexpected error in deleting post")
+      if (response.ok) {
+        toast.success("Post deleted successfully");
+        setIdToDel("");
+        setPosts((prevPosts) =>
+          prevPosts.filter((post) => post._id !== idToDel)
+        );
+      } else {
+        toast.error("Unexpected error in deleting post");
       }
     } catch (error) {
-      console.log("Error in deleting post:", error)
+      console.log("Error in deleting post:", error);
     }
-
-  }
+  };
 
   const [postPopupId, setPostPopupId] = useState(null);
+  const [postLikeIds, setPostLikeIds] = useState([]);
+
+  // Function to handle likes
+  const toggleLikePost = (postId) => {
+    if (postLikeIds.includes(postId)) {
+      setPostLikeIds(postLikeIds.filter((id) => id !== postId));
+    } else {
+      setPostLikeIds([...postLikeIds, postId]);
+    }
+  };
+
   return (
     <>
       <div className="profilePage" id="profilePage">
@@ -207,12 +252,17 @@ function Profile() {
               <i class="fa-solid fa-house"></i>
               <span> Home</span>
             </button>
-            <button>
+            <button onClick={openSearchDialog}>
               <i class="fa-solid fa-magnifying-glass"></i>
               <span>Search</span>
             </button>
             <button>
-              <i class="fa-solid fa-user"></i>
+              <i
+                class="fa-solid fa-user"
+                onClick={() => {
+                  navigate("/profile");
+                }}
+              ></i>
               <span>Profile</span>
             </button>
             <button onClick={toggleMore}>
@@ -278,12 +328,53 @@ function Profile() {
             </button>
           </div>
         </form>
+        <form>
+          <div
+            className="searchModel"
+            style={{ display: isSearchDialogOpen ? "flex" : "none" }}
+          >
+            <button id="closeDialog" onClick={closeSearchDialog}>
+              <i class="fa-solid fa-xmark"></i>
+            </button>
+            <h2>Search</h2>
+            <div className="searchUser">
+              <input
+                type="text"
+                id="searchUsername"
+                value={searchUsername}
+                onChange={(e) => setSearchUsername(e.target.value)}
+                placeholder="Enter username"
+              />
+              <button id="searchBtn" onClick={searchProfileRequest}>
+                <i class="fa-solid fa-magnifying-glass"></i>
+              </button>
+            </div>
+            {loader ? (
+        <div className="loader"></div> // This can be a spinner or loading animation
+      ) : (
+        searchProfile && (
+          <div className="searchedUser">
+            {searchProfile.avatar ? (
+              <img
+                src={searchProfile.avatar}
+                id="suggestImage"
+                alt="Search User Avatar"
+              />
+            ) : (
+              <p></p>
+            )}
+            <div className="suggestDetail">
+              <h3>{searchProfile.name || ""}</h3>
+              <p>{searchProfile.username || ""}</p>
+            </div>
+          </div>
+        )
+      )}
+          </div>
+        </form>
 
         <div className="center">
           <div className="head">
-            <button onClick={handleBack}>
-              <i class="fa-solid fa-arrow-left"></i>
-            </button>
             <span>{user.name}</span>
           </div>
           <div className="cover-image"></div>
@@ -293,47 +384,79 @@ function Profile() {
             <p id="username">@{user.username}</p>
             <p id="bio">{user.occupation}</p>
             <div className="connections">
-              <span id="following-count">93 followings</span> &nbsp;&nbsp;&nbsp;
-              <span id="follower-count">122 followers</span>
+              <span id="following-count">0 followings</span> &nbsp;&nbsp;&nbsp;
+              <span id="follower-count">0 followers</span>
             </div>
             <br />
             <br />
           </div>
           <hr />
           <h2>Posts</h2>
-          {posts.map((userPost) => {
-            return (
-              <div className="post">
-                <div className="post-details">
-                  <div className="post-details-left">
-                    <img id="post-avatar" src={user.avatar} alt="" />
-                    <div>
-                      <h3>{user.name}</h3>
-                      <p>@{user.username}</p>
+          {posts
+            .slice()
+            .sort((a, b) => new Date(b.date) - new Date(a.date))
+            .map((userPost) => {
+              return (
+                <div className="post">
+                  <div className="post-details">
+                    <div className="post-details-left">
+                      <img id="post-avatar" src={user.avatar} alt="" />
+                      <div>
+                        <h3>{user.name}</h3>
+                        <p>@{user.username}</p>
+                      </div>
+                      <p id="dateOfPost">
+                        &nbsp;&nbsp;&nbsp;.{formatDate(userPost.date)}{" "}
+                      </p>
                     </div>
-                    <p id="dateOfPost">
-                      &nbsp;&nbsp;&nbsp;.{formatDate(userPost.date)}{" "}
-                    </p>
-                  </div>
-                  <div className="post-details-right">
-                    <i class="fa-regular fa-heart"></i>
-                    <i class="fa-solid fa-ellipsis-vertical" id="post-popup-dots" 
-                    onClick={()=>{setPostPopupId(userPost._id === postPopupId ? null : userPost._id)}}></i>
-                    <div className="post-popup" style={{display: postPopupId === userPost._id ? "block" : "none"}}>
-                    <button id="delete-btn" onClick={()=>{
-                      setIdToDel(userPost._id);
-                      deletePostRequest();
-                    }}><i class="fa-solid fa-trash"></i></button>
+                    <div className="post-details-right">
+                      <i
+                        class="fa-regular fa-heart"
+                        style={{
+                          color: postLikeIds.includes(userPost._id)
+                            ? "red"
+                            : isLightMode
+                            ? "black"
+                            : "white",
+                        }}
+                        onClick={() => toggleLikePost(userPost._id)}
+                      ></i>
+
+                      <i
+                        class="fa-solid fa-ellipsis-vertical"
+                        id="post-popup-dots"
+                        onClick={() => {
+                          setPostPopupId(
+                            userPost._id === postPopupId ? null : userPost._id
+                          );
+                        }}
+                      ></i>
+                      <div
+                        className="post-popup"
+                        style={{
+                          display:
+                            postPopupId === userPost._id ? "block" : "none",
+                        }}
+                      >
+                        <button
+                          id="delete-btn"
+                          onClick={() => {
+                            setIdToDel(userPost._id);
+                            deletePostRequest();
+                          }}
+                        >
+                          <i class="fa-solid fa-trash"></i>
+                        </button>
+                      </div>
                     </div>
                   </div>
+                  <div className="post-content">
+                    <p>{userPost.content}</p>
+                  </div>
+                  <img id="postImage" src={userPost.image} alt="" />
                 </div>
-                <div className="post-content">
-                  <p>{userPost.content}</p>
-                </div>
-                <img id="postImage" src={userPost.image} alt="" />
-              </div>
-            );
-          })}
+              );
+            })}
         </div>
         <div className="rightbar">
           <div className="searchbox">
@@ -342,9 +465,13 @@ function Profile() {
           <h2>Suggestions</h2>
           <div className="suggestions">
             {users.map((suggestion) => (
-              <div className="suggest" key={suggestion._id} onClick={()=>{
-                navigate("/otherProfile",{state: suggestion._id})
-              }}>
+              <div
+                className="suggest"
+                key={suggestion._id}
+                onClick={() => {
+                  navigate("/otherProfile", { state: suggestion._id });
+                }}
+              >
                 <img src={suggestion.avatar} alt="img" id="suggestImage" />
                 <div className="suggestDetail">
                   <p id="suggestName">{suggestion.name}</p>

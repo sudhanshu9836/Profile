@@ -52,7 +52,7 @@ function Info() {
     }
     try {
       const response = await fetch(
-        "http://localhost:3000/api/v1/user/register",
+        "/api/v1/user/register",
         {
           method: "POST",
           body: dataToSend,
@@ -94,6 +94,7 @@ function Info() {
               <input
                 type="text"
                 id="username"
+                placeholder="Enter your username"
                 required
                 onChange={handleChange}
               />
@@ -105,6 +106,7 @@ function Info() {
                 <input
                   type="number"
                   id="age"
+                  placeholder="Your Age"
                   required
                   onChange={handleChange}
                 />
@@ -134,10 +136,11 @@ function Info() {
             </div>
 
             <div className="info-fields">
-              <label htmlFor="occupation">Occupation:</label>
+              <label htmlFor="occupation">Bio:</label>
               <input
                 type="text"
                 id="occupation"
+                placeholder="Enter your bio"
                 required
                 onChange={handleChange}
               />
@@ -171,6 +174,7 @@ function Info() {
                 id="address"
                 rows="4"
                 required
+                placeholder="Your address"
                 onChange={handleChange}
               ></textarea>
             </div>

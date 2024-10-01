@@ -24,13 +24,16 @@ function SignupPage() {
   const handleSubmit = (e) => {
     e.preventDefault();
     const { email, mobileNo, password, confirmpassword } = formData;
-
+    if(mobileNo.length!=10){
+      toast.error("Please enter correct mobile No")
+    }
     if(password == confirmpassword){
       navigate("/info", { state: { email, mobileNo, password } });
     }
     else{
       toast.error("Password mismatch")
     }
+    
   };
 
   return (
@@ -58,7 +61,7 @@ function SignupPage() {
               <div className="field">
                 <label htmlFor="contact">Mobile no.</label>
                 <input
-                  type="number"
+                  type="text"
                   id="mobileNo"
                   value={formData.mobileNo}
                   required

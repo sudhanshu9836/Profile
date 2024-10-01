@@ -287,14 +287,10 @@ body {
   width: 17vmax;
   margin-left: 0.8vmax;
   border-radius: 20px;
-  background-color: var(--search-color);
-  color: var(--text-color);
+  background-color: white;
+  color: black;
 }
 
-input::placeholder {
-  color: var(--text-color);
-  opacity: 0.7;
-}
 
 .suggest {
   display: flex;
@@ -348,7 +344,7 @@ input::placeholder {
   color: red;
 }
 
-.postModel {
+.postModel, .searchModel {
   background-color: var(--bg-color);
   color: var(--text-color);
   z-index: 999;
@@ -384,6 +380,10 @@ input::placeholder {
   background-color: red;
   color: white;
 }
+.searchModel{
+  height: 30vmax;
+  top: 10%;
+}
 #addImgBtn {
   margin: 2vmax;
   position: absolute;
@@ -392,7 +392,62 @@ input::placeholder {
   cursor: pointer;
   border: none;
 }
+.searchUser{
+  display: flex;
+  align-items: center;
+}
 
+#searchBtn{
+  margin-left: 1vmax;
+  margin-top: 0.6vmax;
+  height: 3vmax;
+  padding: 1vmax;
+  border-radius: 15px;
+  cursor: pointer;
+}
+.searchedUser{
+  display: flex;
+  align-items: center;
+  margin: 5vmax 0px;
+  cursor: pointer;
+  border: 0.5px solid var(--border-color);
+  padding: 1vmax 20vmax 1vmax 1vmax;
+  border-radius: 10px;
+  box-shadow: 2px 2px 2px lightgray;
+}
+.loader {
+  margin-top: 5vmax;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  position: relative;
+  animation: rotate 1s linear infinite
+}
+.loader::before , .loader::after {
+  content: "";
+  box-sizing: border-box;
+  position: absolute;
+  inset: 0px;
+  border-radius: 50%;
+  border: 5px solid #FFF;
+  animation: prixClipFix 2s linear infinite ;
+}
+.loader::after{
+  inset: 8px;
+  transform: rotate3d(90, 90, 0, 180deg );
+  border-color: #FF3D00;
+}
+
+@keyframes rotate {
+  0%   {transform: rotate(0deg)}
+  100%   {transform: rotate(360deg)}
+}
+
+@keyframes prixClipFix {
+    0%   {clip-path:polygon(50% 50%,0 0,0 0,0 0,0 0,0 0)}
+    50%  {clip-path:polygon(50% 50%,0 0,100% 0,100% 0,100% 0,100% 0)}
+    75%, 100%  {clip-path:polygon(50% 50%,0 0,100% 0,100% 100%,100% 100%,100% 100%)}
+}
 /* Media Queries */
 
 @media screen and (max-width: 650px) {

@@ -1,5 +1,6 @@
 import { User } from "../models/user.model.js";
 import { ApiResponse } from "../utils/ApiResponse.js";
+import { ApiError } from "../utils/ApiError.js";
 import { asyncHandler } from "../utils/asyncHandler.js";
 
 export const findUserById = asyncHandler(async(req, res)=>{
@@ -25,4 +26,23 @@ export const findUserById = asyncHandler(async(req, res)=>{
           );
     }
 
+})
+
+export const findUserByUsername = asyncHandler(async(req,res)=>{
+  try {
+    const {username} = req.body;
+  
+    const user = await User.findOne({username:username})
+  
+    if(!user){
+      throw new ApiError(400, "User not found");
+    }
+  
+    return res.status(200).json(
+      new ApiResponse(200, user, "Searched the user")
+    )
+  
+  } catch (error) {
+    console.log("Error in searching : ", error)
+  }
 })
