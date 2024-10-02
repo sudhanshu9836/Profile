@@ -72,6 +72,7 @@ function Profile() {
 
   const addNewPost = async (e) => {
     e.preventDefault();
+    setLoader(true);
     const formDataToSend = new FormData();
     formDataToSend.append("postContent", formData.postContent);
     formDataToSend.append("postImage", formData.postImage);
@@ -96,6 +97,8 @@ function Profile() {
     } catch (error) {
       toast.error("Error occurred during adding post");
       console.log("Error", error);
+    }finally{
+      setLoader(false)
     }
   };
   // Suggestions
@@ -305,6 +308,9 @@ function Profile() {
             className="postModel"
             style={{ display: isDialogOpen ? "flex" : "none" }}
           >
+            {loader?(<div className="loader"></div>):
+            (
+              <>
             <button id="closeDialog" onClick={closeDialog}>
               <i class="fa-solid fa-xmark"></i>
             </button>
@@ -316,16 +322,19 @@ function Profile() {
               value={formData.postContent}
               placeholder="Enter your content.."
             />
-            <input
-              type="file"
-              onChange={handleFileChange}
-              id="postImage"
-              name="postImage"
-            />
-            {/* Change onSubmit to onClick to prevent premature submission */}
+              <input
+                type="file"
+                onChange={handleFileChange}
+                id="postImage"
+                name="postImage"
+              />
             <button id="post" type="button" onClick={addNewPost}>
               Post
-            </button>
+            </button>           
+              </>
+              
+            )}
+            {/* Change onSubmit to onClick to prevent premature submission */}
           </div>
         </form>
         <form>
@@ -350,7 +359,7 @@ function Profile() {
               </button>
             </div>
             {loader ? (
-        <div className="loader"></div> // This can be a spinner or loading animation
+        <div className="loader"></div> 
       ) : (
         searchProfile && (
           <div className="searchedUser">
