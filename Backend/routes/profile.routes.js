@@ -6,6 +6,6 @@ const router = Router();
 
 
 router.route("/profile").post(findUserById);
-router.route("/search").post(findUserByUsername)
+router.route("/search").post(findUserByUsername);
 
 export default router;

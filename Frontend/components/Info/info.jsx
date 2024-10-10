@@ -21,7 +21,7 @@ function Info() {
     gender: "",
     dob: "",
     address: "",
-    occupation: "",
+    bio: "",
     avatar: null,
     facebook: "",
     instagram: "",
@@ -40,7 +40,6 @@ function Info() {
     if (files.length > 0) {
       const file = files[0];
       setFormData({ ...formData, avatar: file });
-
       const imageUrl = URL.createObjectURL(file);
       setImagePreview(imageUrl);
     }
@@ -144,10 +143,10 @@ function Info() {
               </div>
   
               <div className="info-fields">
-                <label htmlFor="occupation">Bio:</label>
+                <label htmlFor="bio">Bio:</label>
                 <input
                   type="text"
-                  id="occupation"
+                  id="bio"
                   placeholder="Enter your bio"
                   required
                   onChange={handleChange}

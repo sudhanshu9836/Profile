@@ -8,7 +8,7 @@ import { toast } from "react-toastify";
 function OtherProfile() {
   const navigate = useNavigate();
   const location = useLocation();
-  const[loader, setLoader] = useState(false);
+  const [loader, setLoader] = useState(false);
 
   const [profile, setProfile] = useState("");
   const [posts, setPosts] = useState([]);
@@ -60,6 +60,8 @@ function OtherProfile() {
     }
   }, [id]);
 
+  const profileId = profile._id;
+
   const [isSearchDialogOpen, setIsSearchDialogOpen] = useState(false);
   const openSearchDialog = () => {
     setIsSearchDialogOpen(true);
@@ -96,8 +98,7 @@ function OtherProfile() {
     } catch (error) {
       toast.error("Something went wrong while searching");
       console.log("Error : ", error);
-    }
-    finally{
+    } finally {
       setLoader(false);
     }
   };
@@ -117,8 +118,10 @@ function OtherProfile() {
         const data = await response.json();
         if (response.ok) {
           const allUsers = data.data.users;
-          //   const suggestedUsers = allUsers.filter((i) => i._id != userId);
-          setUsers(allUsers);
+          const profiles = allUsers.filter((i) => i._id != profileId);
+          const shuffleProfiles = [...profiles].sort(() => 0.5 - Math.random());
+          const suggestedUsers = shuffleProfiles.slice(0, 6);
+          setUsers(suggestedUsers);
         } else {
           alert("Failed to fetch users");
         }
@@ -211,38 +214,41 @@ function OtherProfile() {
             </button>
           </div>
           {loader ? (
-        <div className="loader"></div> // This can be a spinner or loading animation
-      ) : (
-        searchProfile && (
-          <div className="searchedUser">
-            {searchProfile.avatar ? (
-              <img
-                src={searchProfile.avatar}
-                id="suggestImage"
-                alt="Search User Avatar"
-              />
-            ) : (
-              <p></p>
-            )}
-            <div className="suggestDetail">
-              <h3>{searchProfile.name || ""}</h3>
-              <p>{searchProfile.username || ""}</p>
-            </div>
-          </div>
-        )
-      )}
+            <div className="loader"></div> // This can be a spinner or loading animation
+          ) : (
+            searchProfile && (
+              <div className="searchedUser">
+                {searchProfile.avatar ? (
+                  <img
+                    src={searchProfile.avatar}
+                    id="suggestImage"
+                    alt="Search User Avatar"
+                  />
+                ) : (
+                  <p></p>
+                )}
+                <div className="suggestDetail">
+                  <h3>{searchProfile.name || ""}</h3>
+                  <p>{searchProfile.username || ""}</p>
+                </div>
+              </div>
+            )
+          )}
         </div>
       </form>
       <div className="center">
         <div className="head">
           <span>{profile.name}</span>
         </div>
-        <div className="cover-image"></div>
+        <div
+          className="cover-image"
+          style={{ backgroundImage: `url(${profile.coverImage})` }}
+        ></div>
         <img src={profile.avatar} id="avatarImage" alt="avatar" />
         <div className="profile-details">
           <h3 id="name">{profile.name}</h3>
           <p id="username">@{profile.username}</p>
-          <p id="bio">{profile.occupation}</p>
+          <p id="bio">{profile.bio}</p>
           <div className="connections">
             <span id="following-count">93 followings</span> &nbsp;&nbsp;&nbsp;
             <span id="follower-count">122 followers</span>

@@ -5,6 +5,7 @@ import Info from "../components/Info/info";
 import SignupPage from "../components/SignUp/signupPage";
 import Profile from "../components/Profile/profile";
 import OtherProfile from "../components/Profile/otherProfile";
+import EditProfile from "../components/Profile/editProfile";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -25,6 +26,10 @@ const router = createBrowserRouter([
   {
     path: "/otherProfile",
     element: <OtherProfile/>
+  },
+  {
+    path: "/edit",
+    element: <EditProfile/>
   }
 ]);
 

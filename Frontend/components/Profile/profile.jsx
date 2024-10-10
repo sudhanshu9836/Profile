@@ -97,8 +97,8 @@ function Profile() {
     } catch (error) {
       toast.error("Error occurred during adding post");
       console.log("Error", error);
-    }finally{
-      setLoader(false)
+    } finally {
+      setLoader(false);
     }
   };
   // Suggestions
@@ -112,7 +112,9 @@ function Profile() {
         const data = await response.json();
         if (response.ok) {
           const allUsers = data.data.users;
-          const suggestedUsers = allUsers.filter((i) => i._id != userId);
+          const profiles = allUsers.filter((i) => i._id != userId);
+          const shuffleProfiles = [...profiles].sort(() => 0.5 - Math.random());
+          const suggestedUsers = shuffleProfiles.slice(0, 6);
           setUsers(suggestedUsers);
         } else {
           toast.error("Failed to fetch users");
@@ -196,8 +198,7 @@ function Profile() {
     } catch (error) {
       toast.error("Something went wrong while searching");
       console.log("Error : ", error);
-    }
-    finally{
+    } finally {
       setLoader(false);
     }
   };
@@ -277,7 +278,11 @@ function Profile() {
             className="moreOptionsBox"
             style={{ display: more ? "flex" : "none" }}
           >
-            <button>
+            <button
+              onClick={() => {
+                navigate("/edit", { state: userId });
+              }}
+            >
               <i class="fa-solid fa-pen-to-square"></i>Edit Profile
             </button>
             <button>
@@ -308,31 +313,31 @@ function Profile() {
             className="postModel"
             style={{ display: isDialogOpen ? "flex" : "none" }}
           >
-            {loader?(<div className="loader"></div>):
-            (
+            {loader ? (
+              <div className="loader"></div>
+            ) : (
               <>
-            <button id="closeDialog" onClick={closeDialog}>
-              <i class="fa-solid fa-xmark"></i>
-            </button>
-            <h2>Post Now</h2>
-            <textarea
-              name="postContent"
-              id="postContent"
-              onChange={handleChange}
-              value={formData.postContent}
-              placeholder="Enter your content.."
-            />
-              <input
-                type="file"
-                onChange={handleFileChange}
-                id="postImage"
-                name="postImage"
-              />
-            <button id="post" type="button" onClick={addNewPost}>
-              Post
-            </button>           
+                <button id="closeDialog" onClick={closeDialog}>
+                  <i class="fa-solid fa-xmark"></i>
+                </button>
+                <h2>Post Now</h2>
+                <textarea
+                  name="postContent"
+                  id="postContent"
+                  onChange={handleChange}
+                  value={formData.postContent}
+                  placeholder="Enter your content.."
+                />
+                <input
+                  type="file"
+                  onChange={handleFileChange}
+                  id="postImage"
+                  name="postImage"
+                />
+                <button id="post" type="button" onClick={addNewPost}>
+                  Post
+                </button>
               </>
-              
             )}
             {/* Change onSubmit to onClick to prevent premature submission */}
           </div>
@@ -359,26 +364,26 @@ function Profile() {
               </button>
             </div>
             {loader ? (
-        <div className="loader"></div> 
-      ) : (
-        searchProfile && (
-          <div className="searchedUser">
-            {searchProfile.avatar ? (
-              <img
-                src={searchProfile.avatar}
-                id="suggestImage"
-                alt="Search User Avatar"
-              />
+              <div className="loader"></div>
             ) : (
-              <p></p>
+              searchProfile && (
+                <div className="searchedUser">
+                  {searchProfile.avatar ? (
+                    <img
+                      src={searchProfile.avatar}
+                      id="suggestImage"
+                      alt="Search User Avatar"
+                    />
+                  ) : (
+                    <p></p>
+                  )}
+                  <div className="suggestDetail">
+                    <h3>{searchProfile.name || ""}</h3>
+                    <p>{searchProfile.username || ""}</p>
+                  </div>
+                </div>
+              )
             )}
-            <div className="suggestDetail">
-              <h3>{searchProfile.name || ""}</h3>
-              <p>{searchProfile.username || ""}</p>
-            </div>
-          </div>
-        )
-      )}
           </div>
         </form>
 
@@ -386,12 +391,15 @@ function Profile() {
           <div className="head">
             <span>{user.name}</span>
           </div>
-          <div className="cover-image"></div>
+          <div
+            className="cover-image"
+            style={{ backgroundImage: `url(${user.coverImage})` }}
+          ></div>
           <img src={user.avatar} id="avatarImage" alt="avatar" />
           <div className="profile-details">
             <h3 id="name">{user.name}</h3>
             <p id="username">@{user.username}</p>
-            <p id="bio">{user.occupation}</p>
+            <p id="bio">{user.bio}</p>
             <div className="connections">
               <span id="following-count">0 followings</span> &nbsp;&nbsp;&nbsp;
               <span id="follower-count">0 followers</span>

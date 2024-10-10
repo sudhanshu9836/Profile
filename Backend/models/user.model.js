@@ -55,7 +55,7 @@ const userSchema = mongoose.Schema(
       type: String,
       index: true,
     },
-    occupation: {
+    bio: {
       type: String,
       index: true,
     },
@@ -72,6 +72,9 @@ const userSchema = mongoose.Schema(
       type: mongoose.Schema.Types.ObjectId,
       ref: "Post"
     }],
+    coverImage:{
+      type: String,
+    },
     fb: {
       type: String,
       index: true,

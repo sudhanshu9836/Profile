@@ -221,6 +221,8 @@ body {
   height: 12vmax;
   width: 100%;
   background-color: grey;
+  background-size: cover;
+  background-position: center;
 }
 
 #avatarImage {
@@ -291,7 +293,6 @@ body {
   color: black;
 }
 
-
 .suggest {
   display: flex;
   align-items: center;
@@ -322,7 +323,7 @@ body {
   margin-top: 3vmax;
 }
 
-.post-popup{
+.post-popup {
   height: fit-content;
   width: 2vmax;
   border: 2px solid var(--border-color);
@@ -332,19 +333,20 @@ body {
   top: 4vmax;
   right: 7.5vmax;
 }
-#post-popup-dots{
+#post-popup-dots {
   cursor: pointer;
 }
-#delete-btn{
+#delete-btn {
   border: none;
   background-color: var(--bg-color);
   color: var(--text-color);
 }
-#delete-btn:hover{
+#delete-btn:hover {
   color: red;
 }
 
-.postModel, .searchModel {
+.postModel,
+.searchModel {
   background-color: var(--bg-color);
   color: var(--text-color);
   z-index: 999;
@@ -380,7 +382,7 @@ body {
   background-color: red;
   color: white;
 }
-.searchModel{
+.searchModel {
   height: 30vmax;
   top: 10%;
 }
@@ -392,12 +394,12 @@ body {
   cursor: pointer;
   border: none;
 }
-.searchUser{
+.searchUser {
   display: flex;
   align-items: center;
 }
 
-#searchBtn{
+#searchBtn {
   margin-left: 1vmax;
   margin-top: 0.6vmax;
   height: 3vmax;
@@ -405,7 +407,7 @@ body {
   border-radius: 15px;
   cursor: pointer;
 }
-.searchedUser{
+.searchedUser {
   display: flex;
   align-items: center;
   margin: 5vmax 0px;
@@ -421,32 +423,44 @@ body {
   height: 48px;
   border-radius: 50%;
   position: relative;
-  animation: rotate 1s linear infinite
+  animation: rotate 1s linear infinite;
 }
-.loader::before , .loader::after {
+.loader::before,
+.loader::after {
   content: "";
   box-sizing: border-box;
   position: absolute;
   inset: 0px;
   border-radius: 50%;
-  border: 5px solid #FFF;
-  animation: prixClipFix 2s linear infinite ;
+  border: 5px solid #fff;
+  animation: prixClipFix 2s linear infinite;
 }
-.loader::after{
+.loader::after {
   inset: 8px;
-  transform: rotate3d(90, 90, 0, 180deg );
-  border-color: #FF3D00;
+  transform: rotate3d(90, 90, 0, 180deg);
+  border-color: #ff3d00;
 }
 
 @keyframes rotate {
-  0%   {transform: rotate(0deg)}
-  100%   {transform: rotate(360deg)}
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
 @keyframes prixClipFix {
-    0%   {clip-path:polygon(50% 50%,0 0,0 0,0 0,0 0,0 0)}
-    50%  {clip-path:polygon(50% 50%,0 0,100% 0,100% 0,100% 0,100% 0)}
-    75%, 100%  {clip-path:polygon(50% 50%,0 0,100% 0,100% 100%,100% 100%,100% 100%)}
+  0% {
+    clip-path: polygon(50% 50%, 0 0, 0 0, 0 0, 0 0, 0 0);
+  }
+  50% {
+    clip-path: polygon(50% 50%, 0 0, 100% 0, 100% 0, 100% 0, 100% 0);
+  }
+  75%,
+  100% {
+    clip-path: polygon(50% 50%, 0 0, 100% 0, 100% 100%, 100% 100%, 100% 100%);
+  }
 }
 /* Media Queries */
 
